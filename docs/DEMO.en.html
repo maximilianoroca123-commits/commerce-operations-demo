@@ -1,0 +1,106 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Demonstration walkthrough</title><style>body{margin:0;color:#233247;background:#f0f3f7;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1050px;margin:32px auto;padding:40px 52px;background:white;border:1px solid #d6dfe8;border-radius:10px}header{padding-bottom:18px;border-bottom:3px solid #165a76;margin-bottom:24px}.brand{font-size:13px;letter-spacing:.1em;font-weight:700;color:#165a76}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font-size:2.1rem;line-height:1.15;color:#132d47}h2{font-size:1.4rem;margin-top:2em;border-bottom:1px solid #e0e7ed;padding-bottom:7px}h3{font-size:1.12rem;margin-top:1.7em}a{color:#125f8c;text-underline-offset:3px}p,li{max-width:95ch}li{margin:.4em 0}pre{background:#122b3f;color:#edf4fa;padding:18px;border-radius:6px;overflow:auto}code{font: .9em/1.55 Consolas,Menlo,monospace;background:#eef3f6;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}pre code{background:none;padding:0;color:inherit;white-space:pre}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:24px 0}th,td{border:1px solid #d5dfe8;padding:11px;vertical-align:top;text-align:left}th{background:#eaf1f6}tr:nth-child(even){background:#fafbfd}blockquote{margin:20px 0;padding:12px 20px;border-left:4px solid #165a76;background:#f0f7fa}details{background:#f2f6f9;padding:13px 18px;border-radius:6px;margin:22px 0}summary{cursor:pointer;font-weight:600}.toc{font-size:14px}footer{margin-top:40px;padding-top:16px;border-top:1px solid #dce4ea;font-size:12px;color:#536a7c}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:1.8rem}}@media print{@page{size:A4;margin:17mm}body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0;border:0}nav,details{display:none}h1{font-size:24pt}h2{font-size:15pt;break-after:avoid}h3{break-after:avoid}table{font-size:8pt}tr,pre{break-inside:avoid}pre{background:#eef3f6;color:black;white-space:pre-wrap}pre code{color:black;white-space:pre-wrap}.table{overflow:visible}}</style></head><body><main><header><p class="brand">COMMERCE OPERATIONS DEMO</p><nav><a href="../README.en.html">Overview</a></nav></header><details><summary>Contents</summary><div class="toc">
+<ul>
+<li><a href="#demonstration-walkthrough">Demonstration walkthrough</a><ul>
+<li><a href="#1-minimal-automatic-workflow">1. Minimal automatic workflow</a></li>
+<li><a href="#2-online-purchasing-and-customer-service">2. Online purchasing and customer service</a></li>
+<li><a href="#3-cash-register-and-in-person-sale">3. Cash register and in-person sale</a></li>
+<li><a href="#4-supplier-and-partial-goods-receipt">4. Supplier and partial goods receipt</a></li>
+<li><a href="#5-bilingual-verification">5. Bilingual verification</a></li>
+<li><a href="#6-additional-operations">6. Additional operations</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details><h1 id="demonstration-walkthrough">Demonstration walkthrough</h1>
+<p><a href="DEMO.es.html">Español</a> · <a href="DEMO.en.html">English</a> · <a href="../README.en.html">Home</a></p>
+<p>Use fictitious data and a demonstration database only. IDs are generated during operations; record the actual values shown by the application. No fixed order number is assumed. Account setup is described in the README.</p>
+<h2 id="1-minimal-automatic-workflow">1. Minimal automatic workflow</h2>
+<ol>
+<li>Sign in as <code>demo_admin</code>. Select English in the header.</li>
+<li>Open Simulated replenishment → Prepare demo example → review → confirm.</li>
+<li>Wait: with an opening fund of zero, no purchase order should be created.</li>
+<li>Add <strong>2000</strong> in simulated funds and confirm. Wait for automatic order generation.</li>
+<li>Check three units at <strong>500.50</strong>: reserved <strong>1501.50</strong>, paid <strong>0</strong>, available <strong>498.50</strong>.</li>
+<li>Select Simulate approved payment and confirm. Paid becomes <strong>1501.50</strong>; reserved becomes <strong>0</strong>.</li>
+<li>Observe preparing → ready → dispatched without manually submitting notices. Physical stock remains <strong>0</strong>.</li>
+<li>Open the purchase order → Receive goods. Delivery note <code>demo-auto-1</code>, quantity <strong>3</strong>, unit cost <strong>500.50</strong>. Review and confirm.</li>
+<li>Check stock <strong>3</strong>, received order and available funds <strong>498.50</strong>.</li>
+<li>Return to the panel and Pause purchase order generation.</li>
+</ol>
+<p>Prepare demo example is idempotent: an existing example is preserved; stock is not reset and funds are not added. To repeat from scratch, use another isolated database rather than editing tables manually.</p>
+<h2 id="2-online-purchasing-and-customer-service">2. Online purchasing and customer service</h2>
+<ol>
+<li>As administrator, create fictitious product <code>Demo item</code>, Technology category, brand <code>Demo</code>, price <strong>1000</strong> and stock <strong>5</strong>.</li>
+<li>As <code>demo_customer</code>, add one unit to the cart, select Store pickup and create the order.</li>
+<li>Before payment: physical <strong>5</strong>, reserved <strong>1</strong>, available <strong>4</strong>. Approve simulated payment before the reservation expires.</li>
+<li>Physical stock becomes <strong>4</strong>. As <code>demo_staff</code>, advance delivery through preparing, ready and delivered.</li>
+<li>As customer, request a return. The request alone changes neither stock nor money.</li>
+<li>As employee, open Customer service, receive one resalable unit and confirm the simulated refund.</li>
+<li>Complete the request with a fictitious explanation. The customer should see it on their request.</li>
+<li>Result: stock <strong>5</strong>, refunded <strong>1000</strong>, outstanding <strong>0</strong>, request completed. The online purchase does not add cash to the register.</li>
+</ol>
+<p>Creating an order and paying are separate steps. Delivery does not charge or deduct stock again. Returns use the stored sale price.</p>
+<h2 id="3-cash-register-and-in-person-sale">3. Cash register and in-person sale</h2>
+<ol>
+<li>As employee, open a cash shift with a counted opening float of <strong>1000</strong>. If a shift already exists, review it first.</li>
+<li>Sell one unit of <code>Demo item</code> for <strong>1000</strong>; cash received <strong>2000</strong>, change <strong>1000</strong>.</li>
+<li>Check stock <strong>5 → 4</strong> and expected balance <strong>1000 → 2000</strong>. Download the receipt.</li>
+<li>Record a resalable return of one unit: stock <strong>4 → 5</strong>, with the refund still outstanding.</li>
+<li>Confirm the <strong>1000</strong> refund from the open cash shift: expected balance returns to <strong>1000</strong>.</li>
+<li>Count and close with <strong>1000</strong>; expected difference <strong>0</strong>.</li>
+</ol>
+<p>Returned goods receipt and the money outflow are separate operations. A previously closed shift is not modified to record a later refund.</p>
+<h2 id="4-supplier-and-partial-goods-receipt">4. Supplier and partial goods receipt</h2>
+<ol>
+<li>As administrator, create <code>Demo procurement</code>, price <strong>1000</strong>, stock <strong>0</strong>, with no individual rule.</li>
+<li>As <code>demo_supplier</code>, open My catalog. Add code <code>demo-offer-1</code>, name <code>Demo procurement</code>, brand <code>Demo</code>, Technology, cost <strong>500.50</strong>, availability <strong>3</strong>. Keep any other offers that should remain active.</li>
+<li>As administrator, link that offer to the local product and evaluate replenishment. Record the new purchase order ID.</li>
+<li>As supplier, submit confirmed and dispatched notices. Local stock remains <strong>0</strong>.</li>
+<li>As employee, receive delivery note <code>demo-delivery-1</code>, one unit at <strong>500.50</strong>: partially received, <strong>2</strong> outstanding, stock <strong>1</strong>.</li>
+<li>Receive delivery note <code>demo-delivery-2</code>, two units at the same cost: received, <strong>0</strong> outstanding, stock <strong>3</strong>.</li>
+<li>As supplier, view the closed order: no new notices are allowed.</li>
+</ol>
+<p>Published catalogs are complete replacements: omitting a row makes that offer inactive. This normal purchase order does not use the automatic workflow's simulated fund.</p>
+<h2 id="5-bilingual-verification">5. Bilingual verification</h2>
+<p>Switch ES/EN with an unsent cart or form. Its values and session should remain, with no new mutation requests. Labels, displayed states, dates and amounts change; user-authored names and notes remain unchanged.</p>
+<p>Finish or cancel an open confirmation dialog before changing language. Downloaded receipts use the selected language. Repeating the same workflow in a new database in Spanish produces the same quantity, money and history effects.</p>
+<h2 id="6-additional-operations">6. Additional operations</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Operation</th>
+<th>Access and precondition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cancel customer purchase</td>
+<td>Request before dispatch; administration processes cancellation and refund</td>
+</tr>
+<tr>
+<td>Cancel supplier purchase order</td>
+<td>Administration, no receipts; an unpaid simulated order releases funds and pauses generation</td>
+</tr>
+<tr>
+<td>Correct delivery note or close incomplete</td>
+<td>Administration, normal partially received order; do not use an already paid demo order</td>
+</tr>
+<tr>
+<td>Account administration</td>
+<td>Console/API; purchases do not change roles</td>
+</tr>
+<tr>
+<td>Individual rules and alerts</td>
+<td>API/console; separate from the general demo rule</td>
+</tr>
+<tr>
+<td>Emergency purchases and receipts</td>
+<td>API/console; separate fund and records</td>
+</tr>
+<tr>
+<td>Backup and restoration</td>
+<td>Create/verify through API/console; restore locally with the API stopped</td>
+</tr>
+</tbody>
+</table></div>
+<p>Alternative branches require suitable test records. The same fully received order cannot subsequently demonstrate cancellation, correction and incomplete closing.</p><footer>Functional demonstration · Fictitious data · Simulated payments</footer></main></body></html>

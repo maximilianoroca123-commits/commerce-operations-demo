@@ -1,0 +1,830 @@
+{
+  "simulation0": {
+    "simulado": true,
+    "regla": {
+      "minimo": 0,
+      "cantidad": 3,
+      "costo_max_centavos": 100000,
+      "vigencia_horas": 24
+    },
+    "configuracion": {
+      "id": 1,
+      "activa": 1,
+      "producto_id": 4,
+      "resultado": "Fondo simulado insuficiente. No se creó un pedido ni se reservó dinero."
+    },
+    "producto": {
+      "id": 4,
+      "nombre": "Prueba automatización",
+      "stock": 0
+    },
+    "fondo": {
+      "aportado_centavos": 0,
+      "pagado_centavos": 0,
+      "saldo_centavos": 0,
+      "reservado_centavos": 0,
+      "disponible_centavos": 0
+    },
+    "compras": [],
+    "total": 0,
+    "pagina": 1
+  },
+  "admin": {
+    "usuario": "compras",
+    "rol": "compras",
+    "rol_efectivo": "administrador",
+    "cliente_id": null,
+    "proveedor": null,
+    "debe_cambiar_clave": false,
+    "opciones_operativas": [
+      "1",
+      "2",
+      "3",
+      "4",
+      "5",
+      "6",
+      "7",
+      "8",
+      "9",
+      "10",
+      "11",
+      "12",
+      "13",
+      "14",
+      "15",
+      "16",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "22",
+      "23",
+      "24",
+      "25",
+      "26",
+      "27",
+      "28",
+      "29",
+      "30",
+      "31",
+      "32",
+      "33",
+      "34",
+      "35",
+      "36",
+      "37",
+      "38",
+      "39",
+      "40",
+      "41",
+      "42",
+      "43"
+    ],
+    "cuenta_compatibilidad": true
+  },
+  "employee": {
+    "usuario": "empleado_auto",
+    "rol": "empleado",
+    "rol_efectivo": "empleado",
+    "cliente_id": null,
+    "proveedor": null,
+    "debe_cambiar_clave": false,
+    "opciones_operativas": [
+      "7",
+      "8",
+      "12",
+      "13",
+      "14",
+      "15",
+      "17",
+      "18",
+      "19",
+      "20",
+      "21",
+      "23",
+      "27",
+      "28",
+      "29",
+      "30",
+      "34",
+      "35",
+      "36",
+      "37",
+      "38",
+      "41",
+      "43"
+    ],
+    "cuenta_compatibilidad": false
+  },
+  "supplier": {
+    "usuario": "proveedor_auto",
+    "rol": "proveedor",
+    "rol_efectivo": "proveedor",
+    "cliente_id": null,
+    "proveedor": "demo",
+    "debe_cambiar_clave": false,
+    "opciones_operativas": [],
+    "cuenta_compatibilidad": false
+  },
+  "products": {
+    "productos": [
+      {
+        "id": 1,
+        "nombre": "Mouse",
+        "categoria": "tecnologia",
+        "precio": 8500,
+        "stock": 7,
+        "marca": "TecnoSur"
+      },
+      {
+        "id": 2,
+        "nombre": "teclado",
+        "categoria": "tecnologia",
+        "precio": 7500,
+        "stock": 5,
+        "marca": "TecnoSur"
+      },
+      {
+        "id": 3,
+        "nombre": "Pan",
+        "categoria": "alimento",
+        "precio": 7000,
+        "stock": 12,
+        "marca": "Pan del Barrio"
+      },
+      {
+        "id": 4,
+        "nombre": "Prueba automatización",
+        "categoria": "tecnologia",
+        "precio": 1000,
+        "stock": 0,
+        "marca": "Demo"
+      }
+    ],
+    "total": 4,
+    "cantidad_paginas": 1,
+    "pagina": 1,
+    "limite": 10
+  },
+  "product_id": 4,
+  "aporte": {
+    "aportado_centavos": 200000,
+    "pagado_centavos": 0,
+    "saldo_centavos": 200000,
+    "reservado_centavos": 0,
+    "disponible_centavos": 200000
+  },
+  "simulation1": {
+    "simulado": true,
+    "regla": {
+      "minimo": 0,
+      "cantidad": 3,
+      "costo_max_centavos": 100000,
+      "vigencia_horas": 24
+    },
+    "configuracion": {
+      "id": 1,
+      "activa": 1,
+      "producto_id": 4,
+      "resultado": "Pedido generado y dinero reservado. Falta aprobar el pago simulado."
+    },
+    "producto": {
+      "id": 4,
+      "nombre": "Prueba automatización",
+      "stock": 0
+    },
+    "fondo": {
+      "aportado_centavos": 200000,
+      "pagado_centavos": 0,
+      "saldo_centavos": 200000,
+      "reservado_centavos": 150150,
+      "disponible_centavos": 49850
+    },
+    "compras": [
+      {
+        "pedido_id": 1,
+        "importe_centavos": 150150,
+        "estado": "pendiente_pago",
+        "pagado_en": null,
+        "actualizado_en": "2026-11-19T20:04:16.889884+00:00",
+        "producto_id": 4,
+        "proveedor": "demo",
+        "id_externo": "auto-web-1",
+        "cantidad": 3,
+        "cantidad_recibida": 0,
+        "costo_ofertado_centavos": 50050,
+        "producto_nombre": "Prueba automatización"
+      }
+    ],
+    "total": 1,
+    "pagina": 1
+  },
+  "order_id": 1,
+  "supply0": {
+    "pedido": {
+      "id": 1,
+      "producto_id": 4,
+      "proveedor": "demo",
+      "id_externo": "auto-web-1",
+      "cantidad": 3,
+      "costo_ofertado_centavos": 50050,
+      "costo_pagado_centavos": null,
+      "recibido_en": null,
+      "cancelado_en": null,
+      "cerrado_incompleto_en": null,
+      "cantidad_recibida": 0,
+      "cantidad_no_entregada": 0,
+      "cantidad_pendiente": 3,
+      "estado": "pendiente"
+    },
+    "producto_nombre": "Prueba automatización",
+    "acciones": [
+      "remitos",
+      "avisos",
+      "historial",
+      "cancelar"
+    ],
+    "simulacion": {
+      "pedido_id": 1,
+      "importe_centavos": 150150,
+      "estado": "pendiente_pago",
+      "pagado_en": null,
+      "actualizado_en": "2026-11-19T20:04:16.889884+00:00"
+    }
+  },
+  "supply_orders": {
+    "pedidos": [
+      {
+        "id": 1,
+        "producto_id": 4,
+        "proveedor": "demo",
+        "id_externo": "auto-web-1",
+        "cantidad": 3,
+        "costo_ofertado_centavos": 50050,
+        "costo_pagado_centavos": null,
+        "recibido_en": null,
+        "cancelado_en": null,
+        "cerrado_incompleto_en": null,
+        "cantidad_recibida": 0,
+        "cantidad_no_entregada": 0,
+        "cantidad_pendiente": 3,
+        "estado": "pendiente"
+      }
+    ],
+    "total": 1,
+    "pagina": 1,
+    "limite": 10
+  },
+  "payment": {
+    "pedido_id": 1,
+    "importe_centavos": 150150,
+    "estado": "preparando",
+    "pagado_en": "2026-11-19T20:04:16.901225+00:00",
+    "actualizado_en": "2026-11-19T20:04:16.901225+00:00"
+  },
+  "simulation2": {
+    "simulado": true,
+    "regla": {
+      "minimo": 0,
+      "cantidad": 3,
+      "costo_max_centavos": 100000,
+      "vigencia_horas": 24
+    },
+    "configuracion": {
+      "id": 1,
+      "activa": 1,
+      "producto_id": 4,
+      "resultado": "Pedido generado y dinero reservado. Falta aprobar el pago simulado."
+    },
+    "producto": {
+      "id": 4,
+      "nombre": "Prueba automatización",
+      "stock": 0
+    },
+    "fondo": {
+      "aportado_centavos": 200000,
+      "pagado_centavos": 150150,
+      "saldo_centavos": 49850,
+      "reservado_centavos": 0,
+      "disponible_centavos": 49850
+    },
+    "compras": [
+      {
+        "pedido_id": 1,
+        "importe_centavos": 150150,
+        "estado": "preparando",
+        "pagado_en": "2026-11-19T20:04:16.901225+00:00",
+        "actualizado_en": "2026-11-19T20:04:16.901225+00:00",
+        "producto_id": 4,
+        "proveedor": "demo",
+        "id_externo": "auto-web-1",
+        "cantidad": 3,
+        "cantidad_recibida": 0,
+        "costo_ofertado_centavos": 50050,
+        "producto_nombre": "Prueba automatización"
+      }
+    ],
+    "total": 1,
+    "pagina": 1
+  },
+  "simulation3": {
+    "simulado": true,
+    "regla": {
+      "minimo": 0,
+      "cantidad": 3,
+      "costo_max_centavos": 100000,
+      "vigencia_horas": 24
+    },
+    "configuracion": {
+      "id": 1,
+      "activa": 1,
+      "producto_id": 4,
+      "resultado": "Hay un pedido abierto. No se genera otro."
+    },
+    "producto": {
+      "id": 4,
+      "nombre": "Prueba automatización",
+      "stock": 0
+    },
+    "fondo": {
+      "aportado_centavos": 200000,
+      "pagado_centavos": 150150,
+      "saldo_centavos": 49850,
+      "reservado_centavos": 0,
+      "disponible_centavos": 49850
+    },
+    "compras": [
+      {
+        "pedido_id": 1,
+        "importe_centavos": 150150,
+        "estado": "despachado",
+        "pagado_en": "2026-11-19T20:04:16.901225+00:00",
+        "actualizado_en": "2026-11-19T20:04:28.903251+00:00",
+        "producto_id": 4,
+        "proveedor": "demo",
+        "id_externo": "auto-web-1",
+        "cantidad": 3,
+        "cantidad_recibida": 0,
+        "costo_ofertado_centavos": 50050,
+        "producto_nombre": "Prueba automatización"
+      }
+    ],
+    "total": 1,
+    "pagina": 1
+  },
+  "supply3": {
+    "pedido": {
+      "id": 1,
+      "producto_id": 4,
+      "proveedor": "demo",
+      "id_externo": "auto-web-1",
+      "cantidad": 3,
+      "costo_ofertado_centavos": 50050,
+      "costo_pagado_centavos": null,
+      "recibido_en": null,
+      "cancelado_en": null,
+      "cerrado_incompleto_en": null,
+      "cantidad_recibida": 0,
+      "cantidad_no_entregada": 0,
+      "cantidad_pendiente": 3,
+      "estado": "pendiente"
+    },
+    "producto_nombre": "Prueba automatización",
+    "acciones": [
+      "remitos",
+      "avisos",
+      "historial",
+      "recibir"
+    ],
+    "simulacion": {
+      "pedido_id": 1,
+      "importe_centavos": 150150,
+      "estado": "despachado",
+      "pagado_en": "2026-11-19T20:04:16.901225+00:00",
+      "actualizado_en": "2026-11-19T20:04:28.903251+00:00"
+    }
+  },
+  "supplier3": {
+    "pedido": {
+      "id": 1,
+      "producto_id": 4,
+      "proveedor": "demo",
+      "id_externo": "auto-web-1",
+      "cantidad": 3,
+      "costo_ofertado_centavos": 50050,
+      "costo_pagado_centavos": null,
+      "recibido_en": null,
+      "cancelado_en": null,
+      "cerrado_incompleto_en": null,
+      "cantidad_recibida": 0,
+      "cantidad_no_entregada": 0,
+      "cantidad_pendiente": 3,
+      "estado": "pendiente"
+    },
+    "acciones_aviso": [],
+    "ultimo_aviso": {
+      "referencia": "simulacion-despachado",
+      "estado": "despachado",
+      "nota": "Despacho simulado. El negocio debe confirmar la recepción física.",
+      "registrado_en": "2026-11-19T20:04:28.903251+00:00"
+    },
+    "simulacion": {
+      "pedido_id": 1,
+      "importe_centavos": 150150,
+      "estado": "despachado",
+      "pagado_en": "2026-11-19T20:04:16.901225+00:00",
+      "actualizado_en": "2026-11-19T20:04:28.903251+00:00"
+    }
+  },
+  "notices": {
+    "avisos": [
+      {
+        "referencia": "simulacion-despachado",
+        "estado": "despachado",
+        "nota": "Despacho simulado. El negocio debe confirmar la recepción física.",
+        "registrado_en": "2026-11-19T20:04:28.903251+00:00"
+      },
+      {
+        "referencia": "simulacion-confirmado",
+        "estado": "confirmado",
+        "nota": "Pago simulado confirmado. Preparación iniciada automáticamente.",
+        "registrado_en": "2026-11-19T20:04:16.901225+00:00"
+      }
+    ],
+    "total": 2,
+    "pagina": 1,
+    "limite": 10
+  },
+  "receipt": {
+    "estado": "entrega_registrada",
+    "entrega": {
+      "referencia": "remito-auto",
+      "cantidad": 3,
+      "costo_pagado_centavos": 50050,
+      "registrado_en": "2026-11-19T20:04:16.977Z"
+    },
+    "pedido": {
+      "id": 1,
+      "producto_id": 4,
+      "proveedor": "demo",
+      "id_externo": "auto-web-1",
+      "cantidad": 3,
+      "costo_ofertado_centavos": 50050,
+      "costo_pagado_centavos": 50050,
+      "recibido_en": "2026-11-19T20:04:16.977Z",
+      "cancelado_en": null,
+      "cerrado_incompleto_en": null,
+      "cantidad_recibida": 3,
+      "cantidad_no_entregada": 0,
+      "cantidad_pendiente": 0,
+      "estado": "recibido"
+    }
+  },
+  "simulation4": {
+    "simulado": true,
+    "regla": {
+      "minimo": 0,
+      "cantidad": 3,
+      "costo_max_centavos": 100000,
+      "vigencia_horas": 24
+    },
+    "configuracion": {
+      "id": 1,
+      "activa": 1,
+      "producto_id": 4,
+      "resultado": "Hay un pedido abierto. No se genera otro."
+    },
+    "producto": {
+      "id": 4,
+      "nombre": "Prueba automatización",
+      "stock": 3
+    },
+    "fondo": {
+      "aportado_centavos": 200000,
+      "pagado_centavos": 150150,
+      "saldo_centavos": 49850,
+      "reservado_centavos": 0,
+      "disponible_centavos": 49850
+    },
+    "compras": [
+      {
+        "pedido_id": 1,
+        "importe_centavos": 150150,
+        "estado": "recibido",
+        "pagado_en": "2026-11-19T20:04:16.901225+00:00",
+        "actualizado_en": "2026-11-19T20:04:16.977384+00:00",
+        "producto_id": 4,
+        "proveedor": "demo",
+        "id_externo": "auto-web-1",
+        "cantidad": 3,
+        "cantidad_recibida": 3,
+        "costo_ofertado_centavos": 50050,
+        "producto_nombre": "Prueba automatización"
+      }
+    ],
+    "total": 1,
+    "pagina": 1
+  },
+  "supply4": {
+    "pedido": {
+      "id": 1,
+      "producto_id": 4,
+      "proveedor": "demo",
+      "id_externo": "auto-web-1",
+      "cantidad": 3,
+      "costo_ofertado_centavos": 50050,
+      "costo_pagado_centavos": 50050,
+      "recibido_en": "2026-11-19T20:04:16.977Z",
+      "cancelado_en": null,
+      "cerrado_incompleto_en": null,
+      "cantidad_recibida": 3,
+      "cantidad_no_entregada": 0,
+      "cantidad_pendiente": 0,
+      "estado": "recibido"
+    },
+    "producto_nombre": "Prueba automatización",
+    "acciones": [
+      "remitos",
+      "avisos",
+      "historial"
+    ],
+    "simulacion": {
+      "pedido_id": 1,
+      "importe_centavos": 150150,
+      "estado": "recibido",
+      "pagado_en": "2026-11-19T20:04:16.901225+00:00",
+      "actualizado_en": "2026-11-19T20:04:16.977384+00:00"
+    }
+  },
+  "remitos": {
+    "remitos": [
+      {
+        "pedido_id": 1,
+        "referencia": "remito-auto",
+        "cantidad": 3,
+        "costo_pagado_centavos": 50050,
+        "registrado_en": "2026-11-19T20:04:16.977Z"
+      }
+    ],
+    "total": 1,
+    "pagina": 1,
+    "limite": 10
+  },
+  "audit": {
+    "movimientos": [
+      {
+        "id": 12,
+        "entidad": "pedido_proveedor",
+        "entidad_id": "1",
+        "accion": "mercaderia_recibida",
+        "actor": "empleado_auto",
+        "rol": "empleado",
+        "iniciado_por": null,
+        "detalle": {
+          "cantidad": 3,
+          "costo_unitario_centavos": 50050,
+          "remito": "remito-auto"
+        },
+        "registrado_en": "2026-11-19T20:04:16.977Z"
+      },
+      {
+        "id": 11,
+        "entidad": "pedido_proveedor",
+        "entidad_id": "1",
+        "accion": "proveedor_simulado_despachado",
+        "actor": "proveedor_simulado",
+        "rol": "sistema",
+        "iniciado_por": null,
+        "detalle": {
+          "nota": "Despacho simulado. El negocio debe confirmar la recepción física."
+        },
+        "registrado_en": "2026-11-19T20:04:16.904Z"
+      },
+      {
+        "id": 10,
+        "entidad": "pedido_proveedor",
+        "entidad_id": "1",
+        "accion": "entrega_proveedor_simulada",
+        "actor": "proveedor_simulado",
+        "rol": "sistema",
+        "iniciado_por": null,
+        "detalle": {
+          "estado": "despachado"
+        },
+        "registrado_en": "2026-11-19T20:04:16.904Z"
+      },
+      {
+        "id": 9,
+        "entidad": "pedido_proveedor",
+        "entidad_id": "1",
+        "accion": "entrega_proveedor_simulada",
+        "actor": "proveedor_simulado",
+        "rol": "sistema",
+        "iniciado_por": null,
+        "detalle": {
+          "estado": "listo"
+        },
+        "registrado_en": "2026-11-19T20:04:16.903Z"
+      },
+      {
+        "id": 8,
+        "entidad": "pedido_proveedor",
+        "entidad_id": "1",
+        "accion": "proveedor_simulado_confirmado",
+        "actor": "proveedor_simulado",
+        "rol": "sistema",
+        "iniciado_por": "compras",
+        "detalle": {
+          "nota": "Pago simulado confirmado. Preparación iniciada automáticamente."
+        },
+        "registrado_en": "2026-11-19T20:04:16.901Z"
+      },
+      {
+        "id": 7,
+        "entidad": "pedido_proveedor",
+        "entidad_id": "1",
+        "accion": "pago_proveedor_simulado_aprobado",
+        "actor": "compras",
+        "rol": "administrador",
+        "iniciado_por": null,
+        "detalle": {
+          "importe_centavos": 150150
+        },
+        "registrado_en": "2026-11-19T20:04:16.901Z"
+      },
+      {
+        "id": 6,
+        "entidad": "pedido_proveedor",
+        "entidad_id": "1",
+        "accion": "pedido_proveedor_creado",
+        "actor": "reposicion_simulada",
+        "rol": "sistema",
+        "iniciado_por": null,
+        "detalle": {
+          "cantidad": 3,
+          "importe_reservado_centavos": 150150,
+          "simulado": true
+        },
+        "registrado_en": "2026-11-19T20:04:16.894Z"
+      }
+    ],
+    "total": 7,
+    "pagina": 1,
+    "limite": 20
+  },
+  "customer": {
+    "usuario": "customer_i18n",
+    "rol": "cliente",
+    "rol_efectivo": "cliente",
+    "cliente_id": 1,
+    "proveedor": null,
+    "debe_cambiar_clave": false,
+    "opciones_operativas": [],
+    "cuenta_compatibilidad": false
+  },
+  "customer_order0": {
+    "id": 1,
+    "origen": "qr",
+    "referencia": "i18n-order",
+    "canal": "online",
+    "modalidad": "retiro",
+    "estado_pago": "pendiente",
+    "estado_entrega": "pendiente_pago",
+    "total": 8500,
+    "creado_en": "2026-11-19T20:04:17.112Z",
+    "entregado_en": null,
+    "cliente_id": 1,
+    "registrado_por": "customer_i18n",
+    "cliente_al_comprar": {
+      "nombre": "Demo",
+      "apellido": "Customer",
+      "correo": "customer@example.com",
+      "telefono": null,
+      "correo_verificado": 0
+    },
+    "direccion_entrega": null,
+    "identificacion_cliente": "registrado",
+    "medio_pago": "qr_demo",
+    "efectivo": null,
+    "productos": [
+      {
+        "producto_id": 1,
+        "nombre": "Mouse",
+        "cantidad": 1,
+        "precio_unitario": 8500
+      }
+    ],
+    "devoluciones": {
+      "estado_comercial": "vigente",
+      "operaciones": [],
+      "importe_devoluciones": 0,
+      "importe_reintegrado": 0,
+      "importe_por_reintegrar": 0
+    },
+    "historial_entrega": [
+      {
+        "estado": "pendiente_pago",
+        "registrado_en": "2026-11-19T20:04:17.112Z"
+      }
+    ],
+    "siguiente_estado_entrega": null,
+    "acciones_cliente": [
+      "detalle",
+      "solicitudes",
+      "pagar"
+    ]
+  },
+  "customer_order1": {
+    "id": 1,
+    "origen": "qr",
+    "referencia": "i18n-order",
+    "canal": "online",
+    "modalidad": "retiro",
+    "estado_pago": "aprobado",
+    "estado_entrega": "pendiente",
+    "total": 8500,
+    "creado_en": "2026-11-19T20:04:17.112Z",
+    "entregado_en": null,
+    "cliente_id": 1,
+    "registrado_por": "customer_i18n",
+    "cliente_al_comprar": {
+      "nombre": "Demo",
+      "apellido": "Customer",
+      "correo": "customer@example.com",
+      "telefono": null,
+      "correo_verificado": 0
+    },
+    "direccion_entrega": null,
+    "identificacion_cliente": "registrado",
+    "medio_pago": "qr_demo",
+    "efectivo": null,
+    "productos": [
+      {
+        "producto_id": 1,
+        "nombre": "Mouse",
+        "cantidad": 1,
+        "precio_unitario": 8500
+      }
+    ],
+    "devoluciones": {
+      "estado_comercial": "vigente",
+      "operaciones": [],
+      "importe_devoluciones": 0,
+      "importe_reintegrado": 0,
+      "importe_por_reintegrar": 0
+    },
+    "historial_entrega": [
+      {
+        "estado": "pendiente_pago",
+        "registrado_en": "2026-11-19T20:04:17.112Z"
+      },
+      {
+        "estado": "pendiente",
+        "registrado_en": "2026-11-19T20:04:17.175Z"
+      }
+    ],
+    "siguiente_estado_entrega": "preparando",
+    "acciones_cliente": [
+      "detalle",
+      "solicitudes",
+      "comprobante",
+      "cancelacion"
+    ]
+  },
+  "customer_sale_context": null,
+  "customer_orders": {
+    "pedidos": [
+      {
+        "id": 1,
+        "origen": "qr",
+        "referencia": "i18n-order",
+        "canal": "online",
+        "modalidad": "retiro",
+        "estado_pago": "aprobado",
+        "estado_entrega": "pendiente",
+        "total": 8500,
+        "creado_en": "2026-11-19T20:04:17.112Z",
+        "entregado_en": null
+      }
+    ],
+    "total": 1,
+    "pagina": 1,
+    "limite": 20
+  },
+  "sale_id": 1,
+  "offers": [
+    {
+      "id_externo": "auto-web-1",
+      "nombre": "Prueba automatización",
+      "marca": "Demo",
+      "categoria": "tecnologia",
+      "costo_centavos": 50050,
+      "stock_proveedor": 3,
+      "vigente": 1,
+      "producto_id": 4,
+      "producto_nombre": "Prueba automatización",
+      "producto_marca": "Demo"
+    }
+  ]
+}

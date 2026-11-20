@@ -1,0 +1,134 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Architecture and behavior</title><style>body{margin:0;color:#233247;background:#f0f3f7;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1050px;margin:32px auto;padding:40px 52px;background:white;border:1px solid #d6dfe8;border-radius:10px}header{padding-bottom:18px;border-bottom:3px solid #165a76;margin-bottom:24px}.brand{font-size:13px;letter-spacing:.1em;font-weight:700;color:#165a76}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font-size:2.1rem;line-height:1.15;color:#132d47}h2{font-size:1.4rem;margin-top:2em;border-bottom:1px solid #e0e7ed;padding-bottom:7px}h3{font-size:1.12rem;margin-top:1.7em}a{color:#125f8c;text-underline-offset:3px}p,li{max-width:95ch}li{margin:.4em 0}pre{background:#122b3f;color:#edf4fa;padding:18px;border-radius:6px;overflow:auto}code{font: .9em/1.55 Consolas,Menlo,monospace;background:#eef3f6;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}pre code{background:none;padding:0;color:inherit;white-space:pre}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:24px 0}th,td{border:1px solid #d5dfe8;padding:11px;vertical-align:top;text-align:left}th{background:#eaf1f6}tr:nth-child(even){background:#fafbfd}blockquote{margin:20px 0;padding:12px 20px;border-left:4px solid #165a76;background:#f0f7fa}details{background:#f2f6f9;padding:13px 18px;border-radius:6px;margin:22px 0}summary{cursor:pointer;font-weight:600}.toc{font-size:14px}footer{margin-top:40px;padding-top:16px;border-top:1px solid #dce4ea;font-size:12px;color:#536a7c}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:1.8rem}}@media print{@page{size:A4;margin:17mm}body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0;border:0}nav,details{display:none}h1{font-size:24pt}h2{font-size:15pt;break-after:avoid}h3{break-after:avoid}table{font-size:8pt}tr,pre{break-inside:avoid}pre{background:#eef3f6;color:black;white-space:pre-wrap}pre code{color:black;white-space:pre-wrap}.table{overflow:visible}}</style></head><body><main><header><p class="brand">COMMERCE OPERATIONS DEMO</p><nav><a href="../README.en.html">Overview</a></nav></header><details><summary>Contents</summary><div class="toc">
+<ul>
+<li><a href="#architecture-and-behavior">Architecture and behavior</a><ul>
+<li><a href="#overall-design">Overall design</a></li>
+<li><a href="#contracts-and-permissions">Contracts and permissions</a></li>
+<li><a href="#transactions-and-retries">Transactions and retries</a></li>
+<li><a href="#inventory-and-money">Inventory and money</a></li>
+<li><a href="#demonstration-automation">Demonstration automation</a></li>
+<li><a href="#internationalization">Internationalization</a></li>
+<li><a href="#history-and-recovery">History and recovery</a></li>
+<li><a href="#deliberately-separate-extensions">Deliberately separate extensions</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details><h1 id="architecture-and-behavior">Architecture and behavior</h1>
+<p><a href="ARCHITECTURE.es.html">Español</a> · <a href="ARCHITECTURE.en.html">English</a> · <a href="../README.en.html">Home</a></p>
+<h2 id="overall-design">Overall design</h2>
+<p>The system is a modular FastAPI application with a local SQLite database and two clients: web and console. The web client uses same-origin JavaScript, HTML and CSS. Modules separate HTTP entry points, identity, business rules, storage and history without presenting every file as an independent microservice.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Responsibility</th>
+<th>Main files</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Routes and server lifecycle</td>
+<td><code>servidor.py</code>, <code>rutas_*.py</code></td>
+</tr>
+<tr>
+<td>Input contracts and limits</td>
+<td><code>modelos.py</code>, models in <code>usuarios.py</code> and routers</td>
+</tr>
+<tr>
+<td>Identity, roles and ownership</td>
+<td><code>autenticacion.py</code>, <code>usuarios.py</code></td>
+</tr>
+<tr>
+<td>Catalog and inventory</td>
+<td><code>repositorio_sqlite.py</code>, <code>movimientos_inventario.py</code>, <code>inventario_reservas.py</code></td>
+</tr>
+<tr>
+<td>Payments and sale tracking</td>
+<td><code>caja.py</code>, <code>caja_efectivo.py</code>, <code>pedidos_venta.py</code></td>
+</tr>
+<tr>
+<td>Returns and customer service</td>
+<td><code>devoluciones.py</code>, <code>gestiones_cliente.py</code></td>
+</tr>
+<tr>
+<td>Supplier offers and goods receipt</td>
+<td><code>catalogos.py</code>, <code>reposicion.py</code>, <code>pedidos_proveedor.py</code></td>
+</tr>
+<tr>
+<td>General rule and simulated fund</td>
+<td><code>reposicion_simulada.py</code></td>
+</tr>
+<tr>
+<td>Audit and recovery</td>
+<td><code>auditoria_comercial.py</code>, <code>respaldos.py</code></td>
+</tr>
+<tr>
+<td>Interface and translation</td>
+<td><code>interfaz/*.js</code>, <code>interfaz/i18n.js</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Services execute SQL where they need to coordinate a complete transaction. No ORM is used. The original CRUD entry point, <code>main.py</code>, retains its <code>productos.db</code> database; the web application uses <code>productos_api.db</code>. <code>menu_api.py</code> is a client of the latter API.</p>
+<h2 id="contracts-and-permissions">Contracts and permissions</h2>
+<p>FastAPI and Pydantic check accepted types, quantities and fields. Dependencies verify identity and role. Services additionally validate inventory, funds, status and ownership at execution time.</p>
+<p>Authenticating an account does not permit access to every order: customers can access only their purchases, and suppliers their purchase orders. Available buttons guide users, but the server retains actual authorization control.</p>
+<p>Passwords are stored using scrypt with an individual salt. Validation responses avoid echoing sensitive request data. Web credentials remain in memory and are cleared on sign-out.</p>
+<h2 id="transactions-and-retries">Transactions and retries</h2>
+<p>Related changes are committed in one transaction. <code>BEGIN IMMEDIATE</code> obtains the write turn before checking and changing balances or quantities that may be contested.</p>
+<p>Delivery notes, sales, contributions and other operations use references and replay checks. Repeating a reference with the same data retrieves the result where supported; reusing it with different content causes a conflict.</p>
+<p>If a response is lost, the web client retains the reference and request body of the uncertain operation. It retries those same values rather than creating another operation. This is not an exactly-once guarantee for any future external service.</p>
+<h2 id="inventory-and-money">Inventory and money</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Physical stock</td>
+<td>Units recorded at the business</td>
+</tr>
+<tr>
+<td>Goods reservation</td>
+<td>Units committed to open purchases</td>
+</tr>
+<tr>
+<td>Available stock</td>
+<td>Physical stock minus reserved units</td>
+</tr>
+<tr>
+<td>On order</td>
+<td>Goods ordered from a supplier but not yet received</td>
+</tr>
+<tr>
+<td>Sales cash register</td>
+<td>Expected and counted cash by shift</td>
+</tr>
+<tr>
+<td>Emergency fund</td>
+<td>Earlier record of emergency purchases and expenditure</td>
+</tr>
+<tr>
+<td>Simulated fund</td>
+<td>Fictitious funds reserved and paid in the automatic demo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Creating an online purchase reserves goods; approving payment deducts the corresponding stock once. Delivery does not deduct it again. Receiving resalable returned goods and refunding money are separate operations.</p>
+<p>Creating, paying or dispatching a supplier purchase order does not add units to local inventory. Only confirmed goods receipt does so. The sales cash register and simulated fund do not affect each other.</p>
+<p>Local selling prices and cash operations use whole ARS; procurement costs and the simulated fund use integer cents. For example, <code>costo_pagado_centavos=50050</code> means ARS 500.50 per unit. Field names retain that distinction.</p>
+<h2 id="demonstration-automation">Demonstration automation</h2>
+<p>The general rule orders 3 units when the selected product reaches physical stock 0, subject to a maximum unit cost of ARS 1000, an eligible offer and sufficient funds. The full amount is reserved before payment is allowed.</p>
+<p>The administrator approves fictitious payment with a button. The simulated supplier advances through preparing → ready → dispatched. States and timestamps are stored in SQLite. Goods receipt remains manual and may be partial.</p>
+<p>The API task runs approximately every second; each preparation/dispatch step takes about five seconds. The panel polls results every two seconds. Closing the page does not stop processing if the API remains running; stopping the API suspends it, with continuity from persisted state after restart.</p>
+<p>Pausing prevents new orders without undoing reservations or payments. Cancelling before payment releases the reservation and pauses generation. Supplier refunds and post-payment cost changes are not implemented in this demo.</p>
+<h2 id="internationalization">Internationalization</h2>
+<p><code>messages.json</code> contains the ES/EN catalog; <code>i18n.js</code> manages language and presentation. <code>messages.js</code> is the generated browser copy. After editing the catalog, run <code>python tools/build_i18n.py</code>; the package already includes this asset and does not require regeneration to run. Text elements are bound to presentation functions so they update without reloading or repeating mutation requests. Fields, session, cart and references are preserved.</p>
+<p>Translations do not change status codes, JSON fields, persisted categories or identifiers. User-entered notes and names are treated as data. Simulator-authored messages are localized. Receipt download sends <code>idioma=es</code> or <code>idioma=en</code>, with the same ownership checks.</p>
+<p>Only the language preference is stored in local storage. HTML forms localize common validation messages. The currency remains ARS even when separators and display formatting change.</p>
+<h2 id="history-and-recovery">History and recovery</h2>
+<p>Inventory movements explain quantity changes. Audit records identify the actor and operation. Both are recorded with the corresponding change. A backup preserves the complete state, not just the catalog.</p>
+<p>Copies are checked using SQLite integrity, relationships and a SHA-256 digest. Restoration requires stopping the server and retains a snapshot of the previous state. Events predating audit tracking are not retrospectively reconstructed.</p>
+<h2 id="deliberately-separate-extensions">Deliberately separate extensions</h2>
+<p>The individual-rule engine, emergency purchases and advanced administration remain in existing modules/API/console tools. This presentation does not add real payments or automate physical transport. A future external integration would need to address notification authenticity, failures, reconciliation and testing without replacing these rules with interface assumptions.</p><footer>Functional demonstration · Fictitious data · Simulated payments</footer></main></body></html>

@@ -1,0 +1,99 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Commerce operations: functional demonstration</title><style>body{margin:0;color:#233247;background:#f0f3f7;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1050px;margin:32px auto;padding:40px 52px;background:white;border:1px solid #d6dfe8;border-radius:10px}header{padding-bottom:18px;border-bottom:3px solid #165a76;margin-bottom:24px}.brand{font-size:13px;letter-spacing:.1em;font-weight:700;color:#165a76}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font-size:2.1rem;line-height:1.15;color:#132d47}h2{font-size:1.4rem;margin-top:2em;border-bottom:1px solid #e0e7ed;padding-bottom:7px}h3{font-size:1.12rem;margin-top:1.7em}a{color:#125f8c;text-underline-offset:3px}p,li{max-width:95ch}li{margin:.4em 0}pre{background:#122b3f;color:#edf4fa;padding:18px;border-radius:6px;overflow:auto}code{font: .9em/1.55 Consolas,Menlo,monospace;background:#eef3f6;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}pre code{background:none;padding:0;color:inherit;white-space:pre}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:24px 0}th,td{border:1px solid #d5dfe8;padding:11px;vertical-align:top;text-align:left}th{background:#eaf1f6}tr:nth-child(even){background:#fafbfd}blockquote{margin:20px 0;padding:12px 20px;border-left:4px solid #165a76;background:#f0f7fa}details{background:#f2f6f9;padding:13px 18px;border-radius:6px;margin:22px 0}summary{cursor:pointer;font-weight:600}.toc{font-size:14px}footer{margin-top:40px;padding-top:16px;border-top:1px solid #dce4ea;font-size:12px;color:#536a7c}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:1.8rem}}@media print{@page{size:A4;margin:17mm}body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0;border:0}nav,details{display:none}h1{font-size:24pt}h2{font-size:15pt;break-after:avoid}h3{break-after:avoid}table{font-size:8pt}tr,pre{break-inside:avoid}pre{background:#eef3f6;color:black;white-space:pre-wrap}pre code{color:black;white-space:pre-wrap}.table{overflow:visible}}</style></head><body><main><header><p class="brand">COMMERCE OPERATIONS DEMO</p><nav><a href="README.en.html">Overview</a></nav></header><details><summary>Contents</summary><div class="toc">
+<ul>
+<li><a href="#commerce-operations-functional-demonstration">Commerce operations: functional demonstration</a><ul>
+<li><a href="#features">Features</a></li>
+<li><a href="#technology-and-organization">Technology and organization</a></li>
+<li><a href="#local-installation">Local installation</a><ul>
+<li><a href="#windows-powershell">Windows / PowerShell</a></li>
+<li><a href="#linux-macos">Linux / macOS</a></li>
+</ul>
+</li>
+<li><a href="#demonstration-and-tests">Demonstration and tests</a></li>
+<li><a href="#languages-data-and-compatibility">Languages, data and compatibility</a></li>
+<li><a href="#scope-and-limitations">Scope and limitations</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details><h1 id="commerce-operations-functional-demonstration">Commerce operations: functional demonstration</h1>
+<p><a href="README.es.html">Español</a> · <a href="README.en.html">English</a></p>
+<p>A portfolio application for a small business: catalog and inventory, sales, cash register, online orders, delivery, returns, customer service and procurement. It includes an automatic replenishment demonstration with reserved funds, manual simulated payment approval and automatic dispatch by a simulated supplier.</p>
+<p>The web interface provides the same functions in Spanish and English through the header selector. One backend and one database retain the business rules, quantities, balances and history. These are not two independently maintained applications.</p>
+<p><strong>All payments, QR workflows and automatic supplier processes are demonstrations. No banks are connected and no real transfers are made. Receipts are not tax invoices.</strong></p>
+<h2 id="features">Features</h2>
+<ul>
+<li>Paginated catalog, search, filters, product details and inventory movements.</li>
+<li>Product creation and editing for administrators.</li>
+<li>In-person sales: cart, cash shift opening, cash received, change, movements and counted closing.</li>
+<li>Online purchasing: temporary reservation, simulated payment, customer-owned orders and delivery tracking.</li>
+<li>Separate physical returns and refunds, with a final response visible to the customer.</li>
+<li>Supplier catalog, offer linking, purchase orders, notices and partial or complete goods receipt.</li>
+<li>Replenishment demo: general rule, simulated fund, reserved amount, approved payment and automatic dispatch; manual goods receipt.</li>
+<li>Account authentication, role permissions and order ownership restrictions.</li>
+<li>Audit history, regression tests and verified backups.</li>
+<li>Sales receipts in ES/EN HTML, preserving transaction data.</li>
+</ul>
+<h2 id="technology-and-organization">Technology and organization</h2>
+<p>Python, FastAPI, Pydantic, SQLite and JavaScript without a frontend framework. HTML and CSS are served by the same application as the API. The web interface requires neither a build step nor Node to run. Node is used for JavaScript and DOM tests.</p>
+<p>API identifiers, table names and many functions retain their original Spanish names for compatibility. This edition uses formal technical documentation and concise implementation comments; the language selector translates presentation, not the data schema.</p>
+<h2 id="local-installation">Local installation</h2>
+<p>Use a new folder. The package includes no private databases, personal passwords, backups or personal screenshots. Preparation adds the schema and initial products when the database is empty; it is not a command for resetting existing data.</p>
+<p>Environment verified for this release: <strong>Python 3.12.14 and Node 24.22.3</strong> for tests. The original application was also used on Windows with a Python 3.14 environment. Python dependencies are pinned in the requirements files.</p>
+<h3 id="windows-powershell">Windows / PowerShell</h3>
+<pre><code class="language-powershell">py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt -r requirements-pruebas.txt
+.\.venv\Scripts\python.exe demo_setup.py --language en
+.\.venv\Scripts\python.exe -m uvicorn servidor:app --host 127.0.0.1 --port 8000
+</code></pre>
+<h3 id="linux-macos">Linux / macOS</h3>
+<pre><code class="language-bash">python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt -r requirements-pruebas.txt
+.venv/bin/python demo_setup.py --language en
+.venv/bin/python -m uvicorn servidor:app --host 127.0.0.1 --port 8000
+</code></pre>
+<p>Open <strong>http://127.0.0.1:8000/interfaz/</strong>. Keep the API running. Choose <strong>Español</strong> or <strong>English</strong> in the header; the language preference is stored locally. Credentials are not saved in local storage.</p>
+<p>Setup prompts for a password, without echoing it, for new demonstration accounts. Use 10–128 ASCII characters. The four new accounts share this password solely to simplify this local demonstration. Running setup again does not modify existing accounts or passwords.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Demo account</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>demo_admin</code></td>
+<td>Administrator</td>
+</tr>
+<tr>
+<td><code>demo_staff</code></td>
+<td>Employee</td>
+</tr>
+<tr>
+<td><code>demo_customer</code></td>
+<td>Customer</td>
+</tr>
+<tr>
+<td><code>demo_supplier</code></td>
+<td>Supplier associated with Demo</td>
+</tr>
+</tbody>
+</table></div>
+<p>When using a copy of an existing database, its accounts and passwords are preserved. Account setup is not required to use the language selector.</p>
+<h2 id="demonstration-and-tests">Demonstration and tests</h2>
+<p>The shortest walkthrough is in <a href="docs/DEMO.en.html">docs/DEMO.en.md</a>. The administrator can prepare the automatic example in the web interface, add simulated funds, approve payment and observe dispatch before confirming goods receipt.</p>
+<pre><code class="language-bash">python -m unittest discover -q
+npm ci
+npm test
+</code></pre>
+<p>Use the virtual environment's interpreter for the first command. <code>npm ci</code> installs development dependencies only; it is not required to run the application. Console QR tools are optional; their dependencies are in <code>requirements-qr.txt</code>.</p>
+<p>Test cases, verification levels and testing limitations are described in <a href="docs/TESTING.en.html">docs/TESTING.en.md</a>.</p>
+<h2 id="languages-data-and-compatibility">Languages, data and compatibility</h2>
+<p>Changing language does not duplicate orders or reset the session, cart or form values. Language changes are temporarily blocked during confirmations and ongoing operations to keep the reviewed summary consistent. Dates and amounts follow the selected locale; the currency remains ARS.</p>
+<p>Product names, brands, references, email addresses, notes and user-authored responses keep their original text. Notices generated by the simulated supplier are localized. Language changes labels and messages, not business data.</p>
+<p>Historical console tools retain their original Spanish interface. The portfolio web interface and account setup support ES/EN; additional operations are documented in both languages and can also be called through the API. This release does not claim that every console menu is translated or that every administrative tool has a web screen.</p>
+<h2 id="scope-and-limitations">Scope and limitations</h2>
+<p>This is a personal demonstration prototype, developed iteratively with AI assistance and test-based validation. It does not represent a commercial commission or a production installation.</p>
+<p>It includes no real banking gateway, payment webhook, automated physical logistics, tax invoicing or production-hardened public deployment. Goods receipt remains a business decision. The automatic supplier runs inside the local simulator, not on an external platform.</p>
+<p>HTTP Basic access is intended for local testing; Base64 is not encryption. Public deployment requires reviewing transport, authentication, configuration and operations. Backup restoration requires stopping the server.</p>
+<p>The earlier individual-rule engine remains available through the API/console. The final demonstration uses a fixed general rule to avoid unnecessary complexity. Full account administration, emergency purchases and some backup tools remain primarily in the console/API.</p><footer>Functional demonstration · Fictitious data · Simulated payments</footer></main></body></html>

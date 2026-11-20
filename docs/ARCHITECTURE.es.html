@@ -1,0 +1,134 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Arquitectura y funcionamiento</title><style>body{margin:0;color:#233247;background:#f0f3f7;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1050px;margin:32px auto;padding:40px 52px;background:white;border:1px solid #d6dfe8;border-radius:10px}header{padding-bottom:18px;border-bottom:3px solid #165a76;margin-bottom:24px}.brand{font-size:13px;letter-spacing:.1em;font-weight:700;color:#165a76}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font-size:2.1rem;line-height:1.15;color:#132d47}h2{font-size:1.4rem;margin-top:2em;border-bottom:1px solid #e0e7ed;padding-bottom:7px}h3{font-size:1.12rem;margin-top:1.7em}a{color:#125f8c;text-underline-offset:3px}p,li{max-width:95ch}li{margin:.4em 0}pre{background:#122b3f;color:#edf4fa;padding:18px;border-radius:6px;overflow:auto}code{font: .9em/1.55 Consolas,Menlo,monospace;background:#eef3f6;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}pre code{background:none;padding:0;color:inherit;white-space:pre}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:24px 0}th,td{border:1px solid #d5dfe8;padding:11px;vertical-align:top;text-align:left}th{background:#eaf1f6}tr:nth-child(even){background:#fafbfd}blockquote{margin:20px 0;padding:12px 20px;border-left:4px solid #165a76;background:#f0f7fa}details{background:#f2f6f9;padding:13px 18px;border-radius:6px;margin:22px 0}summary{cursor:pointer;font-weight:600}.toc{font-size:14px}footer{margin-top:40px;padding-top:16px;border-top:1px solid #dce4ea;font-size:12px;color:#536a7c}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:1.8rem}}@media print{@page{size:A4;margin:17mm}body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0;border:0}nav,details{display:none}h1{font-size:24pt}h2{font-size:15pt;break-after:avoid}h3{break-after:avoid}table{font-size:8pt}tr,pre{break-inside:avoid}pre{background:#eef3f6;color:black;white-space:pre-wrap}pre code{color:black;white-space:pre-wrap}.table{overflow:visible}}</style></head><body><main><header><p class="brand">COMMERCE OPERATIONS DEMO</p><nav><a href="../README.es.html">Presentación</a></nav></header><details><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#arquitectura-y-funcionamiento">Arquitectura y funcionamiento</a><ul>
+<li><a href="#diseno-general">Diseño general</a></li>
+<li><a href="#contratos-y-permisos">Contratos y permisos</a></li>
+<li><a href="#transacciones-y-reintentos">Transacciones y reintentos</a></li>
+<li><a href="#inventario-y-dinero">Inventario y dinero</a></li>
+<li><a href="#automatizacion-de-muestra">Automatización de muestra</a></li>
+<li><a href="#internacionalizacion">Internacionalización</a></li>
+<li><a href="#historial-y-recuperacion">Historial y recuperación</a></li>
+<li><a href="#extensiones-deliberadamente-separadas">Extensiones deliberadamente separadas</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details><h1 id="arquitectura-y-funcionamiento">Arquitectura y funcionamiento</h1>
+<p><a href="ARCHITECTURE.es.html">Español</a> · <a href="ARCHITECTURE.en.html">English</a> · <a href="../README.es.html">Inicio</a></p>
+<h2 id="diseno-general">Diseño general</h2>
+<p>El sistema es una aplicación FastAPI modular con una base SQLite local y dos clientes: web y consola. La web usa JavaScript, HTML y CSS del mismo origen. Los módulos separan entrada HTTP, identidad, reglas del negocio, almacenamiento e historial, sin presentar cada archivo como un microservicio independiente.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Responsabilidad</th>
+<th>Archivos principales</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Rutas y ciclo de vida del servidor</td>
+<td><code>servidor.py</code>, <code>rutas_*.py</code></td>
+</tr>
+<tr>
+<td>Contratos y límites de entrada</td>
+<td><code>modelos.py</code>, modelos de <code>usuarios.py</code> y de routers</td>
+</tr>
+<tr>
+<td>Identidad, roles y pertenencia</td>
+<td><code>autenticacion.py</code>, <code>usuarios.py</code></td>
+</tr>
+<tr>
+<td>Catálogo e inventario</td>
+<td><code>repositorio_sqlite.py</code>, <code>movimientos_inventario.py</code>, <code>inventario_reservas.py</code></td>
+</tr>
+<tr>
+<td>Cobro y seguimiento de venta</td>
+<td><code>caja.py</code>, <code>caja_efectivo.py</code>, <code>pedidos_venta.py</code></td>
+</tr>
+<tr>
+<td>Devolución y atención</td>
+<td><code>devoluciones.py</code>, <code>gestiones_cliente.py</code></td>
+</tr>
+<tr>
+<td>Ofertas y recepción al proveedor</td>
+<td><code>catalogos.py</code>, <code>reposicion.py</code>, <code>pedidos_proveedor.py</code></td>
+</tr>
+<tr>
+<td>Regla general y fondo ficticio</td>
+<td><code>reposicion_simulada.py</code></td>
+</tr>
+<tr>
+<td>Auditoría y recuperación</td>
+<td><code>auditoria_comercial.py</code>, <code>respaldos.py</code></td>
+</tr>
+<tr>
+<td>Interfaz y traducción</td>
+<td><code>interfaz/*.js</code>, <code>interfaz/i18n.js</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Los servicios ejecutan SQL cuando necesitan coordinar una transacción completa. No se utiliza un ORM. El CRUD original de <code>main.py</code> conserva su base <code>productos.db</code>; la aplicación web utiliza <code>productos_api.db</code>. <code>menu_api.py</code> es cliente de esta última API.</p>
+<h2 id="contratos-y-permisos">Contratos y permisos</h2>
+<p>FastAPI y Pydantic comprueban tipos, cantidades y campos aceptados. Las dependencias verifican identidad y rol. Los servicios validan además stock, dinero, estado y pertenencia en el momento de actuar.</p>
+<p>Autenticar una cuenta no permite consultar cualquier pedido: el cliente sólo accede a sus compras y el proveedor a sus pedidos. La interfaz orienta mediante botones disponibles, pero el servidor conserva la autorización real.</p>
+<p>Las contraseñas se guardan derivadas con scrypt y sal individual. Las respuestas de validación evitan repetir datos sensibles de la solicitud. Las credenciales de la web permanecen en memoria y se eliminan al cerrar sesión.</p>
+<h2 id="transacciones-y-reintentos">Transacciones y reintentos</h2>
+<p>Las operaciones relacionadas se confirman dentro de una transacción. <code>BEGIN IMMEDIATE</code> obtiene el turno de escritura antes de verificar y modificar saldos o cantidades que podrían estar en competencia.</p>
+<p>Los remitos, ventas, aportes y otras operaciones utilizan referencias y comprobaciones de repetición. Repetir una referencia con los mismos datos recupera el resultado cuando el recorrido lo admite; reutilizarla con contenido distinto genera conflicto.</p>
+<p>Si una respuesta se pierde, la web conserva referencia y cuerpo de la operación incierta. Reintenta esos mismos datos en lugar de crear otra operación. Esto no constituye una garantía de ejecución exactamente una vez para cualquier servicio externo futuro.</p>
+<h2 id="inventario-y-dinero">Inventario y dinero</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Concepto</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Stock físico</td>
+<td>Unidades registradas en el negocio</td>
+</tr>
+<tr>
+<td>Reserva de mercadería</td>
+<td>Unidades comprometidas por compras abiertas</td>
+</tr>
+<tr>
+<td>Disponible</td>
+<td>Stock físico menos unidades reservadas</td>
+</tr>
+<tr>
+<td>Por recibir</td>
+<td>Mercadería pedida al proveedor que aún no ingresó</td>
+</tr>
+<tr>
+<td>Caja de ventas</td>
+<td>Efectivo esperado y contado por turno</td>
+</tr>
+<tr>
+<td>Fondo de emergencia</td>
+<td>Registro previo de compras y gastos de emergencia</td>
+</tr>
+<tr>
+<td>Fondo simulado</td>
+<td>Dinero ficticio reservado y pagado en la muestra automática</td>
+</tr>
+</tbody>
+</table></div>
+<p>Crear una compra online reserva mercadería; aprobar su pago descuenta el stock correspondiente una sola vez. Entregarla no vuelve a descontar. Recibir una devolución apta y reintegrar dinero son operaciones diferentes.</p>
+<p>Generar, pagar o despachar un pedido al proveedor no agrega unidades al inventario local. Sólo la recepción física confirmada lo hace. La caja de ventas y el fondo simulado no se afectan entre sí.</p>
+<p>Los precios locales y la caja usan pesos enteros; los costos de abastecimiento y el fondo simulado usan centavos enteros. Por ejemplo, <code>costo_pagado_centavos=50050</code> significa ARS 500,50 por unidad. Los nombres de campo conservan esa distinción.</p>
+<h2 id="automatizacion-de-muestra">Automatización de muestra</h2>
+<p>La regla general pide 3 unidades cuando el producto elegido llega a stock físico 0, con un máximo de ARS 1000 por unidad, oferta apta y fondos suficientes. Se reserva el importe completo antes de permitir el pago.</p>
+<p>El administrador aprueba el pago ficticio con un botón. El proveedor simulado avanza preparación → listo → despacho. Los estados y fechas quedan en SQLite. La recepción sigue siendo manual y puede ser parcial.</p>
+<p>La tarea se ejecuta en la API aproximadamente cada segundo; cada paso de preparación/despacho demora unos cinco segundos. El panel consulta resultados cada dos segundos. Cerrar la página no detiene el trabajo si la API permanece activa; detener la API sí lo suspende, con continuidad desde los datos guardados al reiniciar.</p>
+<p>Pausar evita pedidos nuevos, sin deshacer reservas ni pagos. Cancelar antes de pagar libera la reserva y pausa la generación. Reintegros a proveedores y cambios de costo después de pagar no están implementados en esta muestra.</p>
+<h2 id="internacionalizacion">Internacionalización</h2>
+<p><code>messages.json</code> contiene el catálogo ES/EN; <code>i18n.js</code> gestiona idioma y presentación. <code>messages.js</code> es su copia generada para el navegador. Tras editar el catálogo se ejecuta <code>python tools/build_i18n.py</code>; el paquete ya incluye ese archivo y no necesita generarlo para funcionar. Los elementos de texto se enlazan con funciones de presentación para actualizarse sin recargar ni repetir solicitudes de escritura. Los campos, sesión, carrito y referencias se conservan.</p>
+<p>Las traducciones no cambian códigos de estado, campos JSON, categorías persistidas ni identificadores. Las notas y nombres introducidos por usuarios se tratan como datos. Los mensajes propios del simulador se localizan. La descarga del comprobante envía <code>idioma=es</code> o <code>idioma=en</code>, con la misma verificación de titularidad.</p>
+<p>Sólo la preferencia de idioma se guarda en almacenamiento local. Los formularios HTML localizan sus mensajes habituales de validación. La moneda sigue siendo ARS, aunque cambien separadores y formato visual.</p>
+<h2 id="historial-y-recuperacion">Historial y recuperación</h2>
+<p>Los movimientos de inventario explican cambios de cantidad. La auditoría identifica actor y operación. Ambos se registran junto al cambio correspondiente. Un respaldo conserva el estado completo, no sólo el catálogo.</p>
+<p>Las copias se verifican mediante integridad de SQLite, relaciones y huella SHA-256. La restauración se realiza con el servidor detenido y conserva un resguardo anterior. No se reconstruyen retrospectivamente eventos previos a la incorporación de la auditoría.</p>
+<h2 id="extensiones-deliberadamente-separadas">Extensiones deliberadamente separadas</h2>
+<p>El motor de reglas individuales, compras de emergencia y administración avanzada permanecen en módulos/API/consola existentes. La presentación no agrega nuevos pagos reales ni automatiza transporte físico. Una futura integración externa debería resolver autenticidad de notificaciones, fallos, conciliación y pruebas sin sustituir estas reglas por supuestos de la interfaz.</p><footer>Demostración funcional · Datos ficticios · Pagos simulados</footer></main></body></html>

@@ -1,0 +1,99 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Gestión comercial: demostración funcional</title><style>body{margin:0;color:#233247;background:#f0f3f7;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1050px;margin:32px auto;padding:40px 52px;background:white;border:1px solid #d6dfe8;border-radius:10px}header{padding-bottom:18px;border-bottom:3px solid #165a76;margin-bottom:24px}.brand{font-size:13px;letter-spacing:.1em;font-weight:700;color:#165a76}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font-size:2.1rem;line-height:1.15;color:#132d47}h2{font-size:1.4rem;margin-top:2em;border-bottom:1px solid #e0e7ed;padding-bottom:7px}h3{font-size:1.12rem;margin-top:1.7em}a{color:#125f8c;text-underline-offset:3px}p,li{max-width:95ch}li{margin:.4em 0}pre{background:#122b3f;color:#edf4fa;padding:18px;border-radius:6px;overflow:auto}code{font: .9em/1.55 Consolas,Menlo,monospace;background:#eef3f6;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}pre code{background:none;padding:0;color:inherit;white-space:pre}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:24px 0}th,td{border:1px solid #d5dfe8;padding:11px;vertical-align:top;text-align:left}th{background:#eaf1f6}tr:nth-child(even){background:#fafbfd}blockquote{margin:20px 0;padding:12px 20px;border-left:4px solid #165a76;background:#f0f7fa}details{background:#f2f6f9;padding:13px 18px;border-radius:6px;margin:22px 0}summary{cursor:pointer;font-weight:600}.toc{font-size:14px}footer{margin-top:40px;padding-top:16px;border-top:1px solid #dce4ea;font-size:12px;color:#536a7c}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:1.8rem}}@media print{@page{size:A4;margin:17mm}body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0;border:0}nav,details{display:none}h1{font-size:24pt}h2{font-size:15pt;break-after:avoid}h3{break-after:avoid}table{font-size:8pt}tr,pre{break-inside:avoid}pre{background:#eef3f6;color:black;white-space:pre-wrap}pre code{color:black;white-space:pre-wrap}.table{overflow:visible}}</style></head><body><main><header><p class="brand">COMMERCE OPERATIONS DEMO</p><nav><a href="README.es.html">Presentación</a></nav></header><details><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#gestion-comercial-demostracion-funcional">Gestión comercial: demostración funcional</a><ul>
+<li><a href="#funcionalidades">Funcionalidades</a></li>
+<li><a href="#tecnologias-y-organizacion">Tecnologías y organización</a></li>
+<li><a href="#instalacion-local">Instalación local</a><ul>
+<li><a href="#windows-powershell">Windows / PowerShell</a></li>
+<li><a href="#linux-macos">Linux / macOS</a></li>
+</ul>
+</li>
+<li><a href="#demostracion-y-pruebas">Demostración y pruebas</a></li>
+<li><a href="#idiomas-datos-y-compatibilidad">Idiomas, datos y compatibilidad</a></li>
+<li><a href="#alcance-y-limites">Alcance y límites</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details><h1 id="gestion-comercial-demostracion-funcional">Gestión comercial: demostración funcional</h1>
+<p><a href="README.es.html">Español</a> · <a href="README.en.html">English</a></p>
+<p>Aplicación de portafolio para un negocio pequeño: catálogo e inventario, ventas, caja, pedidos online, entregas, devoluciones, atención al cliente y abastecimiento. Incluye una demostración de reposición automática con presupuesto reservado, aprobación manual de pago simulado y despacho automático del proveedor ficticio.</p>
+<p>La web ofrece las mismas funciones en español e inglés mediante el selector del encabezado. Un único backend y una única base conservan las reglas, cantidades, saldos e historial. No son dos aplicaciones independientes.</p>
+<p><strong>Todos los pagos, QR y procesos del proveedor automático son de demostración. No se conectan bancos ni se realizan transferencias reales. Los comprobantes no tienen validez fiscal.</strong></p>
+<h2 id="funcionalidades">Funcionalidades</h2>
+<ul>
+<li>Catálogo paginado, búsqueda, filtros, ficha de producto y movimientos de inventario.</li>
+<li>Creación y edición de productos para administración.</li>
+<li>Venta presencial: carrito, apertura de caja, recibido, vuelto, movimientos y cierre por conteo.</li>
+<li>Compra online: reserva temporal, pago simulado, pedidos propios y seguimiento de entrega.</li>
+<li>Devolución física y reintegro separados, con respuesta final visible para el cliente.</li>
+<li>Catálogo del proveedor, vínculo de ofertas, pedidos, avisos y remitos parciales o completos.</li>
+<li>Reposición de muestra: regla general, fondo ficticio, reserva del importe, pago aprobado y despacho automático; recepción manual.</li>
+<li>Autenticación por cuenta, permisos por rol y restricciones de pertenencia de pedidos.</li>
+<li>Auditoría, pruebas de regresión y respaldos verificados.</li>
+<li>Comprobantes HTML de ventas en ES/EN y conservación de datos de la operación.</li>
+</ul>
+<h2 id="tecnologias-y-organizacion">Tecnologías y organización</h2>
+<p>Python, FastAPI, Pydantic, SQLite y JavaScript sin framework de frontend. HTML y CSS se sirven desde la misma aplicación que la API. La web no requiere compilación ni Node para funcionar. Node se utiliza en las pruebas de JavaScript y DOM.</p>
+<p>Los identificadores de la API, nombres de tablas y buena parte de las funciones mantienen sus nombres originales en español para conservar compatibilidad. La documentación técnica y los comentarios principales de esta edición utilizan lenguaje formal; el selector traduce la presentación, no el esquema de datos.</p>
+<h2 id="instalacion-local">Instalación local</h2>
+<p>Usar una carpeta nueva. El paquete no incluye bases privadas, contraseñas personales, respaldos ni capturas personales. La preparación agrega el esquema y los productos iniciales si la base está vacía; no es una orden para reiniciar datos existentes.</p>
+<p>Entorno verificado durante esta entrega: <strong>Python 3.12.14 y Node 24.22.3</strong> para las pruebas. La aplicación original también se utilizó en Windows con un entorno Python 3.14. Las dependencias de Python están fijadas en los archivos requirements.</p>
+<h3 id="windows-powershell">Windows / PowerShell</h3>
+<pre><code class="language-powershell">py -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r requirements.txt -r requirements-pruebas.txt
+.\.venv\Scripts\python.exe demo_setup.py --language es
+.\.venv\Scripts\python.exe -m uvicorn servidor:app --host 127.0.0.1 --port 8000
+</code></pre>
+<h3 id="linux-macos">Linux / macOS</h3>
+<pre><code class="language-bash">python3 -m venv .venv
+.venv/bin/python -m pip install -r requirements.txt -r requirements-pruebas.txt
+.venv/bin/python demo_setup.py --language es
+.venv/bin/python -m uvicorn servidor:app --host 127.0.0.1 --port 8000
+</code></pre>
+<p>Abrir <strong>http://127.0.0.1:8000/interfaz/</strong>. La API debe permanecer encendida. Elegir <strong>Español</strong> o <strong>English</strong> en el encabezado; el idioma se conserva localmente. No se guardan credenciales en el almacenamiento local.</p>
+<p>La preparación pide una contraseña, sin mostrarla, para las cuentas ficticias nuevas. Debe tener 10–128 caracteres ASCII. Las cuatro cuentas nuevas comparten esa contraseña sólo para facilitar esta demostración local. Repetir la preparación no cambia contraseñas ni cuentas ya existentes.</p>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Cuenta ficticia</th>
+<th>Rol</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>demo_admin</code></td>
+<td>Administrador</td>
+</tr>
+<tr>
+<td><code>demo_staff</code></td>
+<td>Empleado</td>
+</tr>
+<tr>
+<td><code>demo_customer</code></td>
+<td>Cliente</td>
+</tr>
+<tr>
+<td><code>demo_supplier</code></td>
+<td>Proveedor asociado a Demo</td>
+</tr>
+</tbody>
+</table></div>
+<p>Si se usa una copia de una base existente, se conservan sus cuentas y contraseñas. No es necesario ejecutar la preparación de cuentas para utilizar el selector de idioma.</p>
+<h2 id="demostracion-y-pruebas">Demostración y pruebas</h2>
+<p>El recorrido más corto está en <a href="docs/DEMO.es.html">docs/DEMO.es.md</a>. El administrador puede preparar el ejemplo automático desde la web, agregar fondos ficticios, aprobar el pago y observar el despacho antes de confirmar la recepción.</p>
+<pre><code class="language-bash">python -m unittest discover -q
+npm ci
+npm test
+</code></pre>
+<p>Usar el intérprete del entorno virtual para la primera orden. <code>npm ci</code> instala únicamente dependencias de desarrollo; no es necesario para ejecutar la aplicación. Las herramientas QR de consola son opcionales y sus dependencias están en <code>requirements-qr.txt</code>.</p>
+<p>La descripción de los casos, niveles de comprobación y limitaciones de las pruebas se encuentra en <a href="docs/TESTING.es.html">docs/TESTING.es.md</a>.</p>
+<h2 id="idiomas-datos-y-compatibilidad">Idiomas, datos y compatibilidad</h2>
+<p>Cambiar el idioma no duplica pedidos ni reinicia la sesión, el carrito o los campos de formulario. Las confirmaciones y operaciones en curso bloquean temporalmente el cambio para conservar un resumen coherente. Fechas e importes se presentan según el idioma; la moneda sigue siendo ARS.</p>
+<p>Los nombres de productos, marcas, referencias, correos, notas y respuestas redactadas por usuarios conservan su texto original. Los avisos generados por el proveedor simulado se localizan. El idioma modifica etiquetas y mensajes, no los datos del negocio.</p>
+<p>Las herramientas históricas de consola conservan su interfaz original en español. La web de presentación y la preparación de cuentas son ES/EN; las operaciones adicionales se documentan en ambos idiomas y también se pueden invocar por la API. No se afirma que todos los menús de consola estén traducidos ni que todas las herramientas administrativas tengan pantalla web.</p>
+<h2 id="alcance-y-limites">Alcance y límites</h2>
+<p>Este es un prototipo personal de demostración, desarrollado de forma iterativa con asistencia de IA y validación mediante pruebas. No representa un encargo comercial ni una instalación de producción.</p>
+<p>No incluye pasarela bancaria real, webhook de pagos real, logística física automatizada, facturación fiscal ni despliegue público endurecido. La recepción de mercadería sigue siendo una decisión del negocio. El proveedor automático opera dentro del simulador local, no en una plataforma externa.</p>
+<p>El acceso HTTP Basic está previsto para la prueba local; Base64 no es cifrado. Una instalación pública requiere revisar transporte, autenticación, configuración y operación. La restauración de respaldos exige detener el servidor.</p>
+<p>El motor anterior de reglas individuales permanece disponible en API/consola. La demostración final mantiene una regla general fija para evitar complejidad innecesaria. Administración completa de cuentas, compras de emergencia y algunas herramientas de respaldo siguen principalmente en consola/API.</p><footer>Demostración funcional · Datos ficticios · Pagos simulados</footer></main></body></html>

@@ -1,0 +1,106 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Recorrido de demostración</title><style>body{margin:0;color:#233247;background:#f0f3f7;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1050px;margin:32px auto;padding:40px 52px;background:white;border:1px solid #d6dfe8;border-radius:10px}header{padding-bottom:18px;border-bottom:3px solid #165a76;margin-bottom:24px}.brand{font-size:13px;letter-spacing:.1em;font-weight:700;color:#165a76}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font-size:2.1rem;line-height:1.15;color:#132d47}h2{font-size:1.4rem;margin-top:2em;border-bottom:1px solid #e0e7ed;padding-bottom:7px}h3{font-size:1.12rem;margin-top:1.7em}a{color:#125f8c;text-underline-offset:3px}p,li{max-width:95ch}li{margin:.4em 0}pre{background:#122b3f;color:#edf4fa;padding:18px;border-radius:6px;overflow:auto}code{font: .9em/1.55 Consolas,Menlo,monospace;background:#eef3f6;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}pre code{background:none;padding:0;color:inherit;white-space:pre}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:24px 0}th,td{border:1px solid #d5dfe8;padding:11px;vertical-align:top;text-align:left}th{background:#eaf1f6}tr:nth-child(even){background:#fafbfd}blockquote{margin:20px 0;padding:12px 20px;border-left:4px solid #165a76;background:#f0f7fa}details{background:#f2f6f9;padding:13px 18px;border-radius:6px;margin:22px 0}summary{cursor:pointer;font-weight:600}.toc{font-size:14px}footer{margin-top:40px;padding-top:16px;border-top:1px solid #dce4ea;font-size:12px;color:#536a7c}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:1.8rem}}@media print{@page{size:A4;margin:17mm}body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0;border:0}nav,details{display:none}h1{font-size:24pt}h2{font-size:15pt;break-after:avoid}h3{break-after:avoid}table{font-size:8pt}tr,pre{break-inside:avoid}pre{background:#eef3f6;color:black;white-space:pre-wrap}pre code{color:black;white-space:pre-wrap}.table{overflow:visible}}</style></head><body><main><header><p class="brand">COMMERCE OPERATIONS DEMO</p><nav><a href="../README.es.html">Presentación</a></nav></header><details><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#recorrido-de-demostracion">Recorrido de demostración</a><ul>
+<li><a href="#1-circuito-automatico-minimo">1. Circuito automático mínimo</a></li>
+<li><a href="#2-compra-online-y-atencion">2. Compra online y atención</a></li>
+<li><a href="#3-caja-y-venta-presencial">3. Caja y venta presencial</a></li>
+<li><a href="#4-proveedor-y-recepcion-parcial">4. Proveedor y recepción parcial</a></li>
+<li><a href="#5-comprobacion-bilingue">5. Comprobación bilingüe</a></li>
+<li><a href="#6-operaciones-complementarias">6. Operaciones complementarias</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details><h1 id="recorrido-de-demostracion">Recorrido de demostración</h1>
+<p><a href="DEMO.es.html">Español</a> · <a href="DEMO.en.html">English</a> · <a href="../README.es.html">Inicio</a></p>
+<p>Usar únicamente datos ficticios y una base de demostración. Los IDs se generan al operar; anotar los que muestre la aplicación. No se presupone que un pedido tenga un número determinado. La preparación de cuentas está en el README.</p>
+<h2 id="1-circuito-automatico-minimo">1. Circuito automático mínimo</h2>
+<ol>
+<li>Ingresar como <code>demo_admin</code>. Elegir Español en el encabezado.</li>
+<li>Abrir Reposición simulada → Preparar ejemplo → revisar → confirmar.</li>
+<li>Esperar: con fondo inicial cero, no debe generarse un pedido.</li>
+<li>Agregar <strong>2000</strong> ficticios al fondo y confirmar. Esperar el pedido automático.</li>
+<li>Comprobar tres unidades a <strong>500,50</strong>: reservado <strong>1501,50</strong>, pagado <strong>0</strong>, disponible <strong>498,50</strong>.</li>
+<li>Pulsar Simular pago aprobado y confirmar. Pagado pasa a <strong>1501,50</strong>; reservado a <strong>0</strong>.</li>
+<li>Observar preparación → listo → despachado sin registrar avisos manualmente. El stock físico sigue en <strong>0</strong>.</li>
+<li>Abrir el pedido → Recibir mercadería. Remito <code>demo-auto-1</code>, cantidad <strong>3</strong>, costo unitario <strong>500,50</strong>. Revisar y confirmar.</li>
+<li>Comprobar stock <strong>3</strong>, pedido recibido y disponible <strong>498,50</strong>.</li>
+<li>Volver al panel y Pausar generación de pedidos.</li>
+</ol>
+<p>Preparar ejemplo es idempotente: si ya existe, conserva su estado; no reinicia stock ni agrega fondos. Para repetir desde cero usar otra base aislada, no modificar tablas manualmente.</p>
+<h2 id="2-compra-online-y-atencion">2. Compra online y atención</h2>
+<ol>
+<li>Como administrador, crear producto ficticio <code>Demo item</code>, categoría Tecnología, marca <code>Demo</code>, precio <strong>1000</strong> y stock <strong>5</strong>.</li>
+<li>Como <code>demo_customer</code>, agregar una unidad al carrito, elegir Retiro en local y crear el pedido.</li>
+<li>Antes del pago: físico <strong>5</strong>, reservada <strong>1</strong>, disponible <strong>4</strong>. Aprobar el pago simulado antes del vencimiento de la reserva.</li>
+<li>Físico pasa a <strong>4</strong>. Como <code>demo_staff</code>, avanzar la entrega por preparación, listo y entregado.</li>
+<li>Como cliente, solicitar devolución. La solicitud sola no cambia stock ni dinero.</li>
+<li>Como empleado, abrir Atención al cliente, recibir una unidad apta y confirmar el reintegro simulado.</li>
+<li>Completar la atención con una explicación ficticia. El cliente debe verla en su solicitud.</li>
+<li>Resultado: stock <strong>5</strong>, reintegrado <strong>1000</strong>, pendiente <strong>0</strong>, solicitud atendida. La compra online no ingresa billetes en caja.</li>
+</ol>
+<p>Crear el pedido y pagar son pasos distintos. Entregar no vuelve a cobrar ni a descontar. Las devoluciones usan el precio guardado de la venta.</p>
+<h2 id="3-caja-y-venta-presencial">3. Caja y venta presencial</h2>
+<ol>
+<li>Como empleado, abrir un turno con fondo inicial contado <strong>1000</strong>. Si ya existe un turno, revisarlo antes de continuar.</li>
+<li>Vender una unidad de <code>Demo item</code> a <strong>1000</strong>; efectivo recibido <strong>2000</strong>, vuelto <strong>1000</strong>.</li>
+<li>Comprobar stock <strong>5 → 4</strong> y saldo esperado <strong>1000 → 2000</strong>. Descargar el comprobante.</li>
+<li>Registrar devolución apta de una unidad: stock <strong>4 → 5</strong>, con dinero todavía pendiente.</li>
+<li>Confirmar el reintegro de <strong>1000</strong> desde la caja abierta: saldo esperado vuelve a <strong>1000</strong>.</li>
+<li>Contar y cerrar con <strong>1000</strong>; diferencia esperada <strong>0</strong>.</li>
+</ol>
+<p>La recepción de la devolución y el egreso de dinero son dos operaciones. Un turno anterior cerrado no se modifica para registrar un reintegro posterior.</p>
+<h2 id="4-proveedor-y-recepcion-parcial">4. Proveedor y recepción parcial</h2>
+<ol>
+<li>Como administrador, crear <code>Demo procurement</code>, precio <strong>1000</strong> y stock <strong>0</strong>, sin regla individual.</li>
+<li>Como <code>demo_supplier</code>, abrir Mi catálogo. Agregar código <code>demo-offer-1</code>, nombre <code>Demo procurement</code>, marca <code>Demo</code>, Tecnología, costo <strong>500,50</strong>, disponibilidad <strong>3</strong>. Conservar otras ofertas que se quieran mantener activas.</li>
+<li>Como administrador, vincular esa oferta al producto local y evaluar reposición. Anotar el pedido creado.</li>
+<li>Como proveedor, registrar aviso confirmado y despachado. El stock local permanece en <strong>0</strong>.</li>
+<li>Como empleado, recibir remito <code>demo-delivery-1</code>, una unidad a <strong>500,50</strong>: estado parcial, pendientes <strong>2</strong>, stock <strong>1</strong>.</li>
+<li>Recibir remito <code>demo-delivery-2</code>, dos unidades al mismo costo: recibido, pendientes <strong>0</strong>, stock <strong>3</strong>.</li>
+<li>Como proveedor, consultar el pedido cerrado: no admite nuevos avisos.</li>
+</ol>
+<p>El catálogo publicado es completo: omitir una fila la deja inactiva. Este pedido normal no usa el fondo ficticio del circuito automático.</p>
+<h2 id="5-comprobacion-bilingue">5. Comprobación bilingüe</h2>
+<p>Cambiar ES/EN con un carrito o formulario sin enviar. Deben conservarse sus valores y sesión, sin nuevas escrituras. Cambian etiquetas, estados presentados, fechas e importes; nombres y notas propios permanecen iguales.</p>
+<p>Durante un diálogo de confirmación, finalizar o cancelar antes de cambiar el idioma. El comprobante descargado usa el idioma seleccionado. Repetir el mismo recorrido en una base nueva y en inglés produce los mismos efectos en cantidades, dinero e historial.</p>
+<h2 id="6-operaciones-complementarias">6. Operaciones complementarias</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Operación</th>
+<th>Acceso y condición</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cancelar compra del cliente</td>
+<td>Solicitud antes del despacho; administración procesa y gestiona el reintegro</td>
+</tr>
+<tr>
+<td>Cancelar pedido al proveedor</td>
+<td>Administración, sin recepciones; el simulado sin pagar libera reserva y pausa</td>
+</tr>
+<tr>
+<td>Corregir remito o cerrar con faltantes</td>
+<td>Administración, pedido normal parcial; no usar un pedido de muestra ya pagado</td>
+</tr>
+<tr>
+<td>Administrar cuentas</td>
+<td>Consola/API; no se modifican roles desde una compra</td>
+</tr>
+<tr>
+<td>Reglas individuales y alertas</td>
+<td>API/consola; separadas de la regla general de muestra</td>
+</tr>
+<tr>
+<td>Emergencias y comprobantes</td>
+<td>API/consola; fondo y registros distintos</td>
+</tr>
+<tr>
+<td>Respaldo y restauración</td>
+<td>Crear/verificar por API/consola; restaurar localmente con API detenida</td>
+</tr>
+</tbody>
+</table></div>
+<p>Las ramas alternativas requieren registros de ensayo adecuados. No se puede cancelar, corregir y cerrar con faltantes el mismo pedido después de recibirlo por completo.</p><footer>Demostración funcional · Datos ficticios · Pagos simulados</footer></main></body></html>

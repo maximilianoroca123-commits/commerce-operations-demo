@@ -1,0 +1,346 @@
+{
+  "auditoria_comercial": [
+    "id",
+    "entidad",
+    "entidad_id",
+    "accion",
+    "actor",
+    "rol",
+    "iniciado_por",
+    "detalle",
+    "registrado_en"
+  ],
+  "productos": [
+    "id",
+    "nombre",
+    "categoria",
+    "precio",
+    "stock",
+    "marca"
+  ],
+  "ofertas_proveedor": [
+    "proveedor",
+    "id_externo",
+    "nombre",
+    "marca",
+    "categoria",
+    "costo_centavos",
+    "stock_proveedor",
+    "vigente"
+  ],
+  "vinculos_oferta": [
+    "proveedor",
+    "id_externo",
+    "producto_id"
+  ],
+  "pedidos_reposicion": [
+    "id",
+    "producto_id",
+    "proveedor",
+    "id_externo",
+    "cantidad",
+    "costo_ofertado_centavos",
+    "costo_pagado_centavos",
+    "recibido_en",
+    "cancelado_en",
+    "cerrado_incompleto_en",
+    "cantidad_recibida"
+  ],
+  "recepciones_pedido": [
+    "pedido_id",
+    "referencia",
+    "cantidad",
+    "costo_pagado_centavos",
+    "registrado_en"
+  ],
+  "correcciones_recepcion": [
+    "pedido_id",
+    "referencia",
+    "correccion",
+    "cantidad_anterior",
+    "costo_anterior_centavos",
+    "cantidad",
+    "costo_pagado_centavos",
+    "motivo",
+    "registrado_en"
+  ],
+  "ventas": [
+    "referencia",
+    "producto_id",
+    "cantidad",
+    "precio_unitario",
+    "stock_restante",
+    "registrado_en"
+  ],
+  "cobros_demo": [
+    "referencia",
+    "total",
+    "estado",
+    "resuelto_en",
+    "reserva_activa",
+    "vence_en",
+    "estado_operacion",
+    "canal",
+    "modalidad"
+  ],
+  "items_cobro": [
+    "referencia",
+    "producto_id",
+    "nombre",
+    "cantidad",
+    "precio_unitario"
+  ],
+  "proveedor_pagos_demo": [
+    "referencia",
+    "estado",
+    "version",
+    "disponible",
+    "reembolso"
+  ],
+  "eventos_pago_demo": [
+    "referencia",
+    "evento",
+    "estado"
+  ],
+  "pedidos_venta": [
+    "id",
+    "origen",
+    "referencia",
+    "canal",
+    "modalidad",
+    "estado_pago",
+    "estado_entrega",
+    "total",
+    "creado_en",
+    "entregado_en"
+  ],
+  "items_pedido_venta": [
+    "pedido_id",
+    "producto_id",
+    "nombre",
+    "cantidad",
+    "precio_unitario"
+  ],
+  "historial_entrega": [
+    "id",
+    "pedido_id",
+    "estado",
+    "registrado_en"
+  ],
+  "clientes": [
+    "id",
+    "nombre",
+    "apellido",
+    "correo",
+    "telefono",
+    "correo_verificado"
+  ],
+  "usuarios": [
+    "usuario",
+    "clave_hash",
+    "rol",
+    "cliente_id",
+    "proveedor",
+    "activo",
+    "creado_en",
+    "debe_cambiar_clave",
+    "version_credencial"
+  ],
+  "auditoria_cuentas": [
+    "id",
+    "actor",
+    "afectado",
+    "accion",
+    "detalle",
+    "registrado_en"
+  ],
+  "restablecimientos_clave": [
+    "usuario",
+    "referencia",
+    "clave_hash",
+    "motivo",
+    "actor"
+  ],
+  "titulares_pedido": [
+    "pedido_id",
+    "cliente_id",
+    "propietario",
+    "registrado_por",
+    "contacto_compra",
+    "direccion_entrega"
+  ],
+  "solicitudes_cliente": [
+    "pedido_id",
+    "referencia",
+    "usuario",
+    "tipo",
+    "motivo",
+    "estado",
+    "registrado_en"
+  ],
+  "avisos_proveedor": [
+    "pedido_id",
+    "referencia",
+    "proveedor",
+    "usuario",
+    "estado",
+    "nota",
+    "registrado_en"
+  ],
+  "resoluciones_cliente": [
+    "pedido_id",
+    "referencia",
+    "estado",
+    "motivo",
+    "usuario"
+  ],
+  "fuentes_catalogo": [
+    "proveedor",
+    "modo"
+  ],
+  "devoluciones_venta": [
+    "pedido_id",
+    "referencia",
+    "tipo",
+    "motivo",
+    "solicitud",
+    "importe",
+    "estado_reintegro",
+    "creado_en",
+    "reintegrado_en"
+  ],
+  "items_devolucion": [
+    "pedido_id",
+    "referencia",
+    "producto_id",
+    "cantidad",
+    "reponer"
+  ],
+  "turnos_caja": [
+    "referencia",
+    "fondo_inicial",
+    "abierto_en",
+    "cerrado_en",
+    "contado",
+    "esperado_cierre",
+    "diferencia"
+  ],
+  "movimientos_caja": [
+    "id",
+    "caja",
+    "referencia",
+    "tipo",
+    "importe",
+    "motivo",
+    "registrado_en"
+  ],
+  "ventas_efectivo": [
+    "referencia",
+    "caja",
+    "pedido_id",
+    "solicitud",
+    "recibido",
+    "vuelto"
+  ],
+  "movimientos_inventario": [
+    "id",
+    "producto_id",
+    "nombre",
+    "tipo",
+    "referencia",
+    "motivo",
+    "cantidad",
+    "variacion",
+    "stock_anterior",
+    "stock_resultante",
+    "registrado_en"
+  ],
+  "reglas_reposicion": [
+    "producto_id",
+    "configuracion",
+    "version"
+  ],
+  "catalogos_control": [
+    "proveedor",
+    "actualizado_en",
+    "ultimo_intento",
+    "error"
+  ],
+  "pedidos_automaticos": [
+    "pedido_id",
+    "producto_id",
+    "version_regla",
+    "creado_en",
+    "decision"
+  ],
+  "alertas_reposicion": [
+    "id",
+    "producto_id",
+    "codigo",
+    "detalle",
+    "creada_en",
+    "actualizada_en",
+    "resuelta_en"
+  ],
+  "estado_reposicion": [
+    "producto_id",
+    "resultado",
+    "evaluado_en"
+  ],
+  "campanas_reposicion": [
+    "producto_id",
+    "activa"
+  ],
+  "versiones_stock_oferta": [
+    "proveedor",
+    "id_externo",
+    "stock_observado",
+    "version"
+  ],
+  "asignaciones_oferta": [
+    "pedido_id",
+    "proveedor",
+    "id_externo",
+    "version"
+  ],
+  "reposiciones_emergencia": [
+    "producto_id",
+    "referencia",
+    "cantidad",
+    "costo_unitario_centavos",
+    "origen",
+    "motivo",
+    "registrado_en"
+  ],
+  "compras_emergencia": [
+    "referencia",
+    "origen",
+    "origen_normalizado",
+    "motivo",
+    "empleado",
+    "registrado_por",
+    "fecha_compra",
+    "tipo_comprobante",
+    "numero_comprobante",
+    "total_centavos",
+    "solicitud",
+    "resultado_reposicion",
+    "registrado_en"
+  ],
+  "gastos_fondo_emergencia": [
+    "id",
+    "referencia",
+    "fondo",
+    "importe_centavos",
+    "registrado_en"
+  ],
+  "comprobantes_emergencia": [
+    "referencia",
+    "nombre",
+    "mime",
+    "sha256",
+    "contenido",
+    "adjuntado_por",
+    "adjuntado_en"
+  ]
+}

@@ -1,0 +1,108 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Pruebas y verificación</title><style>body{margin:0;color:#233247;background:#f0f3f7;font:16px/1.65 system-ui,-apple-system,Segoe UI,sans-serif}main{max-width:1050px;margin:32px auto;padding:40px 52px;background:white;border:1px solid #d6dfe8;border-radius:10px}header{padding-bottom:18px;border-bottom:3px solid #165a76;margin-bottom:24px}.brand{font-size:13px;letter-spacing:.1em;font-weight:700;color:#165a76}nav{display:flex;gap:20px;flex-wrap:wrap;font-size:14px}h1{font-size:2.1rem;line-height:1.15;color:#132d47}h2{font-size:1.4rem;margin-top:2em;border-bottom:1px solid #e0e7ed;padding-bottom:7px}h3{font-size:1.12rem;margin-top:1.7em}a{color:#125f8c;text-underline-offset:3px}p,li{max-width:95ch}li{margin:.4em 0}pre{background:#122b3f;color:#edf4fa;padding:18px;border-radius:6px;overflow:auto}code{font: .9em/1.55 Consolas,Menlo,monospace;background:#eef3f6;padding:2px 5px;border-radius:3px;overflow-wrap:anywhere}pre code{background:none;padding:0;color:inherit;white-space:pre}.table{overflow-x:auto}table{border-collapse:collapse;width:100%;font-size:14px;margin:24px 0}th,td{border:1px solid #d5dfe8;padding:11px;vertical-align:top;text-align:left}th{background:#eaf1f6}tr:nth-child(even){background:#fafbfd}blockquote{margin:20px 0;padding:12px 20px;border-left:4px solid #165a76;background:#f0f7fa}details{background:#f2f6f9;padding:13px 18px;border-radius:6px;margin:22px 0}summary{cursor:pointer;font-weight:600}.toc{font-size:14px}footer{margin-top:40px;padding-top:16px;border-top:1px solid #dce4ea;font-size:12px;color:#536a7c}@media(max-width:700px){main{margin:0;padding:24px 18px;border:0;border-radius:0}h1{font-size:1.8rem}}@media print{@page{size:A4;margin:17mm}body{background:white;font-size:10pt}main{max-width:none;margin:0;padding:0;border:0}nav,details{display:none}h1{font-size:24pt}h2{font-size:15pt;break-after:avoid}h3{break-after:avoid}table{font-size:8pt}tr,pre{break-inside:avoid}pre{background:#eef3f6;color:black;white-space:pre-wrap}pre code{color:black;white-space:pre-wrap}.table{overflow:visible}}</style></head><body><main><header><p class="brand">COMMERCE OPERATIONS DEMO</p><nav><a href="../README.es.html">Presentación</a></nav></header><details><summary>Contenido</summary><div class="toc">
+<ul>
+<li><a href="#pruebas-y-verificacion">Pruebas y verificación</a><ul>
+<li><a href="#entorno-y-ejecucion">Entorno y ejecución</a></li>
+<li><a href="#cobertura-funcional">Cobertura funcional</a></li>
+<li><a href="#contratos-de-idioma">Contratos de idioma</a></li>
+<li><a href="#evidencia-y-limites">Evidencia y límites</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</details><h1 id="pruebas-y-verificacion">Pruebas y verificación</h1>
+<p><a href="TESTING.es.html">Español</a> · <a href="TESTING.en.html">English</a> · <a href="../README.es.html">Inicio</a></p>
+<h2 id="entorno-y-ejecucion">Entorno y ejecución</h2>
+<p>Se verificó la entrega con Python 3.12.14 y Node 24.22.3. La suite Python utiliza unittest y el cliente de pruebas de FastAPI. Las pruebas de JavaScript utilizan el ejecutor de Node; los contratos de interfaz bilingüe utilizan Happy DOM.</p>
+<pre><code class="language-bash">python -m unittest discover -q
+npm ci
+npm test
+</code></pre>
+<p>Usar el intérprete del entorno virtual y ejecutar desde la raíz del proyecto. Para ejecutar un bloque concreto: <code>python -m unittest test_portfolio_release -q</code> o <code>node --test test_i18n_dom.cjs</code>.</p>
+<p>Resultado de esta entrega: <strong>326 pruebas Python y 41 pruebas JavaScript aprobadas</strong>.</p>
+<h2 id="cobertura-funcional">Cobertura funcional</h2>
+<div class="table"><table>
+<thead>
+<tr>
+<th>Área</th>
+<th>Qué se comprueba</th>
+<th>Referencias</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inventario y catálogo</td>
+<td>Cantidades, filtros, movimientos y restricciones</td>
+<td><code>test_regresion.py</code>, <code>test_movimientos.py</code></td>
+</tr>
+<tr>
+<td>Acceso y pertenencia</td>
+<td>Roles, datos propios, cuentas y contraseñas</td>
+<td><code>test_usuarios.py</code>, <code>test_ciclo_cuentas.py</code></td>
+</tr>
+<tr>
+<td>Ventas y caja</td>
+<td>Cobro, vuelto, turno, reintegro y conteo</td>
+<td><code>test_efectivo.py</code>, <code>test_interfaz_ventas_caja.py</code></td>
+</tr>
+<tr>
+<td>Compra online</td>
+<td>Reserva, pago, pedido y titularidad</td>
+<td><code>test_caja.py</code>, <code>test_interfaz_cliente.py</code></td>
+</tr>
+<tr>
+<td>Entrega y atención</td>
+<td>Transiciones, solicitud y respuesta vinculada</td>
+<td><code>test_pedidos_venta.py</code>, <code>test_interfaz_entregas_atencion.py</code></td>
+</tr>
+<tr>
+<td>Devolución y reintegro</td>
+<td>Separación física/financiera y repetición</td>
+<td><code>test_devoluciones.py</code>, <code>test_interfaz_devoluciones.py</code></td>
+</tr>
+<tr>
+<td>Proveedor y remitos</td>
+<td>Avisos, pertenencia, parciales y cierres</td>
+<td><code>test_abastecimiento.py</code>, <code>test_interfaz_abastecimiento.py</code></td>
+</tr>
+<tr>
+<td>Reposición automática</td>
+<td>Fondos, oferta, reserva, concurrencia y despacho</td>
+<td><code>test_reposicion_simulada.py</code></td>
+</tr>
+<tr>
+<td>Recuperación y evidencia</td>
+<td>Auditoría, respaldos y comprobantes</td>
+<td><code>test_auditoria_comercial.py</code>, <code>test_respaldos.py</code>, <code>test_tickets.py</code></td>
+</tr>
+<tr>
+<td>Presentación bilingüe</td>
+<td>Idioma, datos sin traducir, formularios y mismas escrituras</td>
+<td><code>test_i18n_dom.cjs</code></td>
+</tr>
+<tr>
+<td>Edición de portafolio</td>
+<td>Comprobantes ES/EN, pertenencia y preparación idempotente</td>
+<td><code>test_portfolio_release.py</code></td>
+</tr>
+</tbody>
+</table></div>
+<p>Las pruebas HTTP crean bases temporales por caso. La muestra automática controla el reloj para verificar plazos sin depender de largas esperas. También hay casos que dejan avanzar al trabajador de la API sin una pantalla abierta.</p>
+<h2 id="contratos-de-idioma">Contratos de idioma</h2>
+<p>Las nuevas comprobaciones verifican que:</p>
+<ul>
+<li>El acceso, navegación, catálogo y controles se presentan en ambos idiomas.</li>
+<li>La preferencia se conserva sin almacenar credenciales.</li>
+<li>Cambiar de idioma conserva carrito y valores introducidos, sin nuevas escrituras.</li>
+<li>Nombres, marcas y notas se mantienen aunque coincidan con una palabra traducible.</li>
+<li>El circuito automático completo envía los mismos campos y cantidades en ES/EN.</li>
+<li>La actualización periódica mantiene el idioma y no borra un aporte sin enviar.</li>
+<li>Los avisos automáticos se traducen; las notas redactadas por usuarios no.</li>
+<li>Los errores de dominio cuentan con mensajes en inglés y conservan sus códigos HTTP.</li>
+<li>Descargar un comprobante en otro idioma no evita la restricción de pertenencia ni modifica stock.</li>
+<li>La preparación repetida de cuentas no cambia contraseñas existentes.</li>
+</ul>
+<p>Los nombres JSON, como <code>cantidad</code> y <code>costo_pagado_centavos</code>, son contratos de la API; no se traducen al cambiar la interfaz.</p>
+<h2 id="evidencia-y-limites">Evidencia y límites</h2>
+<p>Esta edición se apoya en los recorridos manuales de la versión funcional previa y agrega pruebas automatizadas de la presentación bilingüe. No se afirma que Happy DOM equivalga a una revisión visual en todos los navegadores.</p>
+<p>La suite no demuestra ausencia de todo defecto ni sustituye pruebas de una pasarela bancaria, un entorno público o logística real. Para revisar visualmente la entrega, seguir el mismo <a href="DEMO.es.html">recorrido de demostración</a> en ambos idiomas usando bases aisladas y datos ficticios.</p>
+<p>Las capturas personales del desarrollo no se distribuyen. Los fixtures de <code>tests/fixtures/</code> son respuestas de una base temporal con identidades sintéticas, sin contraseñas. No contienen la base del usuario ni datos de clientes reales.</p><footer>Demostración funcional · Datos ficticios · Pagos simulados</footer></main></body></html>

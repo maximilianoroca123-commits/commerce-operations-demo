@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Interfaz local de prueba de catálogo, ventas en efectivo y caja.">
+  <title>Gestión del negocio · Sistema de prueba</title>
+  <link rel="stylesheet" href="./estilos.css">
+  <script src="./messages.js" defer></script>
+  <script src="./i18n.js" defer></script>
+  <script src="./app.js" defer></script>
+  <script src="./ventas_caja.js" defer></script>
+  <script src="./devoluciones_web.js" defer></script>
+  <script src="./entregas_atencion.js" defer></script>
+  <script src="./cliente_web.js" defer></script>
+  <script src="./abastecimiento_web.js" defer></script>
+  <script src="./reposicion_simulada.js" defer></script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Ir al contenido</a>
+  <header class="cabecera">
+    <div><strong>Sistema de prueba</strong><span class="secundario">Interfaz de prueba · Gestión del negocio</span></div>
+    <div class="idioma"><label for="ui-language">Idioma</label><select id="ui-language" aria-label="Seleccioná el idioma de la interfaz"><option value="es">Español</option><option value="en">English</option></select></div>
+    <div id="sesion" class="fila" hidden><span id="identidad"></span><button id="mi-clave" type="button">Mi contraseña</button><button id="salir" type="button">Cerrar sesión</button></div>
+  </header>
+  <main id="contenido" tabindex="-1">
+    <div id="mensaje" role="status" aria-live="polite" hidden></div>
+    <section id="acceso" class="tarjeta acceso" aria-labelledby="titulo-acceso">
+      <h1 id="titulo-acceso">Ingresar al sistema</h1>
+      <p>Usá la misma cuenta que en el menú de consola.</p>
+      <form id="form-acceso">
+        <label for="usuario">Usuario</label><input id="usuario" name="usuario" autocomplete="username" required maxlength="64">
+        <label for="clave">Contraseña</label><input id="clave" name="clave" type="password" autocomplete="current-password" required maxlength="128">
+        <button class="principal" type="submit">Ingresar</button>
+      </form>
+      <p class="secundario">La consola sigue disponible para los demás sectores. Incluye compras y seguimiento para clientes, y gestión del negocio para el personal.</p>
+    </section>
+    <div id="aplicacion" hidden>
+      <nav aria-label="Secciones"><button id="catalogo" type="button" class="seleccionado" aria-current="page">Catálogo e inventario</button><button id="nav-ventas" type="button" hidden>Ventas</button><button id="nav-caja" type="button" hidden>Caja de efectivo</button><button id="nav-entregas" type="button" hidden>Entregas</button><button id="nav-atencion" type="button" hidden>Atención al cliente</button><button id="nav-carrito" type="button" hidden>Mi carrito</button><button id="nav-mis-pedidos" type="button" hidden>Mis pedidos</button><button id="nav-mis-solicitudes" type="button" hidden>Mis solicitudes</button><button id="nav-perfil" type="button" hidden>Mi perfil</button><button id="nav-abastecimiento" type="button" hidden>Abastecimiento</button><button id="nav-ofertas" type="button" hidden>Ofertas de proveedores</button><button id="nav-proveedor-pedidos" type="button" hidden>Pedidos del negocio</button><button id="nav-proveedor-catalogo" type="button" hidden>Mi catálogo</button><button id="nav-reposicion-simulada" type="button" hidden>Reposición simulada</button></nav>
+      <section id="lista" aria-labelledby="titulo-lista">
+        <div class="encabezado"><div><h1 id="titulo-lista">Productos</h1><p>Buscá un producto y abrí su ficha para ver las acciones disponibles.</p></div><button id="nuevo" class="principal" type="button" hidden>Crear producto</button></div>
+        <form id="busqueda" class="busqueda tarjeta"><div><label for="texto">Nombre o marca</label><input id="texto" type="search" placeholder="Por ejemplo: Mouse" maxlength="150"></div><div><label for="categoria">Categoría</label><select id="categoria"><option value="">Todas</option><option value="tecnologia">Tecnología</option><option value="alimento">Alimento</option><option value="libreria">Librería</option></select></div><button class="principal" type="submit">Buscar</button><button id="limpiar" type="button">Limpiar filtros</button></form>
+        <div id="resultados" class="tarjeta" aria-busy="false"></div>
+        <div id="paginas" class="paginacion"></div>
+      </section>
+      <section id="ficha" hidden aria-labelledby="titulo-ficha"></section>
+      <section id="editor" hidden aria-labelledby="titulo-editor"></section>
+      <section id="ventas-web" hidden></section>
+      <section id="caja-web" hidden></section>
+      <section id="cobro-web" hidden></section>
+      <section id="entregas-web" hidden></section>
+      <section id="atencion-web" hidden></section>
+      <section id="cliente-web" hidden></section>
+      <section id="abastecimiento-web" hidden></section>
+      <section id="proveedor-web" hidden></section>
+      <section id="reposicion-web" hidden></section>
+      <section id="cambio-clave" class="tarjeta acceso" hidden aria-labelledby="titulo-clave"></section>
+    </div>
+  </main>
+  <dialog id="confirmacion" aria-labelledby="titulo-confirmacion">
+    <h2 id="titulo-confirmacion">Revisar antes de guardar</h2>
+    <div id="resumen-confirmacion"></div>
+    <p id="error-confirmacion" role="alert" hidden></p>
+    <div class="acciones"><button id="cancelar-confirmacion" type="button">Volver al formulario</button><button id="aceptar-confirmacion" class="principal" type="button">Confirmar y guardar</button></div>
+  </dialog>
+</body>
+</html>

@@ -1,0 +1,9 @@
+{
+  "name": "commerce-operations-demo",
+  "version": "1.0.0",
+  "private": true,
+  "description": "ES/EN business operations portfolio demo; Node is used for tests only",
+  "scripts": {"test": "node --test test_interfaz_web_js.cjs test_i18n_dom.cjs"},
+  "engines": {"node": ">=20"},
+  "devDependencies": {"happy-dom": "21.0.4"}
+}
